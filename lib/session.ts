@@ -1,20 +1,21 @@
 
-/* 
-"use client";
 
- import Cookies from "js-cookie"; 
+import { cookies } from "next/headers";
 import type { Session } from "@/types";
 
 const COOKIE_NAME =
-  process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME ?? "landrup_session";
+  process.env.SESSION_COOKIE_NAME ?? "believe_fitness_session";
 
-const REMEMBER_ME_DAYS = 30;
+const REMEMBER_ME_DAYS = 30; // 30 dage
 
-// ─── Read session ───────────────────────────────────────────────────────────
 
-export function getClientSession(): Session | null {
-  const raw = Cookies.get(COOKIE_NAME);
-  if (!raw) return null;
+// ─── Cookie helpers (used in API route handlers) ─────────────────────────── //
+
+export function encodeSession(session: Session): string {
+  return btoa(JSON.stringify(session));
+}
+
+export function decodeSession(raw: string): Session | null {
   try {
     return JSON.parse(atob(raw)) as Session;
   } catch {
@@ -22,21 +23,53 @@ export function getClientSession(): Session | null {
   }
 }
 
-// ─── Save session ───────────────────────────────────────────────────────────
+// ─── Session helpers ─────────────────────────────────────────────────────── //
 
-export function setClientSession(session: Session, rememberMe: boolean): void {
-  const encoded = btoa(JSON.stringify(session));
-  if (rememberMe) {
-    Cookies.set(COOKIE_NAME, encoded, { expires: REMEMBER_ME_DAYS, sameSite: "Lax" });
-  } else {
-    // Session-cookie — slettes når browseren lukkes
-    Cookies.set(COOKIE_NAME, encoded, { sameSite: "Lax" });
+export async function getSession(): Promise<Session | null> {
+  const cookieStore = await cookies();
+  const raw = cookieStore.get(COOKIE_NAME)?.value;
+  
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(atob(raw)) as Session;
+  } catch {
+    return null;
   }
 }
 
-// ─── Delete session ──────────────────────────────────────────────────────────
+export async function setSession(session: Session, rememberMe: false): Promise<void> {
+  const cookieStore = await cookies();
 
-export function clearClientSession(): void {
-  Cookies.remove(COOKIE_NAME);
+  cookieStore.set(COOKIE_NAME, encodeSession(session), {
+    httpOnly: true,
+    sameSite: "strict",
+    path: "/", 
+    secure: process.env.NODE_ENV === "production",
+    ...(rememberMe
+      ? { expires: new Date(Date.now() + REMEMBER_ME_DAYS * 24 * 60 * 60 * 1000) }
+      : {}),
+  });
 }
- */
+ 
+export async function clearSession(): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.delete(COOKIE_NAME);
+}
+
+// ─── Guard helpers ───────────────────────────────────────────────────────── //
+
+
+export async function requireAuth(): Promise<Session | null> {
+  return getSession();
+}
+
+export async function requireInstructor(): Promise<Session | null> {
+  const session = await getSession();
+
+  if (!session) return null;
+
+  if (session.role !== "instructor" && session.role !== "admin") return null;
+
+  return session;
+}

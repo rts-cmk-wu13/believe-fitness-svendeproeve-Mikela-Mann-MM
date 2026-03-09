@@ -1,3 +1,8 @@
+
+
+export function reportError(error: unknown, context?: string) {
+  console.error("Application error:", context, error);
+}
 /* import * as Sentry from "@sentry/nextjs"; 
 import { ApiError, NetworkError } from "./errors";
 

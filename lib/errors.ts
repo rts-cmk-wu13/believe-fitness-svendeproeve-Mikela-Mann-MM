@@ -1,9 +1,21 @@
-/* /**
- * Custom error classes for API error classification.
- * Giver Sentry og udvikleren præcis kontekst om hvad der gik galt.
+
+/*   Custom error classes for API error classification.
+  Giver Sentry og udvikleren præcis kontekst om hvad der gik galt. */
  
 
-export class ApiError extends Error {
+  export class ApiError extends Error {
+    status: number;
+
+    constructor(
+    status: number,
+    message: string
+  ) {
+    super(message);
+    this.status = status;
+  }
+}
+
+/* export class ApiError extends Error {
   constructor(
     public readonly status: number,
     public readonly path: string,
@@ -41,4 +53,4 @@ export class NetworkError extends Error {
     this.name = "NetworkError";
     this.cause = cause;
   }
-} */
+}  */
