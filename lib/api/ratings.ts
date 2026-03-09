@@ -10,6 +10,7 @@ export function getRatings(): Promise<Rating[]> {
 export function createRating(data: CreateRatingPayload, token?: string): Promise<Rating> {
     return apiFetch("/ratings", {
         method: "POST",
+        token,
         body: JSON.stringify(data),
     });
 }   
