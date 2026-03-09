@@ -1,10 +1,10 @@
 
-
+/* 
 /**
  * DAL — Data Access Layer
  * Server-side only. Reads session cookie and exposes auth helpers.
  * Never import this in client components.
- */
+ 
 
 import { cookies } from "next/headers";
 import type { Session } from "@/types";
@@ -14,7 +14,7 @@ const COOKIE_NAME =
 
 // ─── Session helpers ───────────────────────────────────────────────────────
 
-/** Read and parse the session from the HTTP-only cookie. Returns null if missing/invalid. */
+/** Read and parse the session from the HTTP-only cookie. Returns null if missing/invalid. 
 export async function getSession(): Promise<Session | null> {
   const cookieStore = await cookies();
   const raw = cookieStore.get(COOKIE_NAME)?.value;
@@ -26,7 +26,7 @@ export async function getSession(): Promise<Session | null> {
     return null;
   }
 }
-/**  Deletes session-cookie - used for server-side logout  */
+/**  Deletes session-cookie - used for server-side logout  
 export async function clearSession(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);
@@ -34,12 +34,12 @@ export async function clearSession(): Promise<void> {
 
 // ─── Guard helpers ─────────────────────────────────────────────────────────
 
-/** Require an authenticated session. Returns the session or null. */
+/** Require an authenticated session. Returns the session or null. 
 export async function requireAuth(): Promise<Session | null> {
   return getSession();
 }
 
-/** Require instructor or admin role. Returns session or null. */
+/** Require instructor or admin role. Returns session or null. 
 export async function requireInstructor(): Promise<Session | null> {
   const session = await getSession();
   if (!session) return null;
@@ -49,7 +49,7 @@ export async function requireInstructor(): Promise<Session | null> {
 
 // ─── Cookie helpers (used in API route handlers) ───────────────────────────
 
-/** Encode a session into a base64 string for the cookie value. */
+/** Encode a session into a base64 string for the cookie value. 
 export function encodeSession(session: Session): string {
   return btoa(JSON.stringify(session));
-}
+} */

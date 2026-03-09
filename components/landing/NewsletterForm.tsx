@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -76,4 +76,4 @@ export default function NewsletterForm() {
       </form>
     </section>
   );
-}
+} */

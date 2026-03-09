@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/nextjs"; 
+/* import * as Sentry from "@sentry/nextjs"; 
 import { ApiError, NetworkError } from "./errors";
 
 type Context = Record<string, unknown>;
@@ -7,7 +7,7 @@ type Context = Record<string, unknown>;
  * Centraliseret fejlrapportering.
  * - Development: console med farvet output og kontekst
  * - Production: Sentry med struktureret kontekst
- */
+ 
 export function reportError(error: unknown, context?: Context): void {
   const enriched = buildContext(error, context);
 
@@ -47,4 +47,4 @@ function buildContext(error: unknown, extra?: Context): Record<string, unknown> 
   }
 
   return base;
-}
+} */

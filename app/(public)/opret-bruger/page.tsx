@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -84,9 +84,9 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 py-10 bg-(--brand-dark)">
 
-      {/* Logo */}
+      {/* Logo }
       <div className="absolute top-6 w-full px-6">
-        {/* Ikon centreret */}
+        {/* Ikon centreret }
         <div className="flex justify-center mb-4 pb-8 pt-8">
           <Image
             src="/logo/LD-logo.png"
@@ -95,7 +95,7 @@ export default function RegisterPage() {
             height={64}
           />
         </div>
-        {/* Tekst-logo til højre */}
+        {/* Tekst-logo til højre }
         <div className="w-full text-right">
           <Image
             src="/logo/logo.png"
@@ -108,7 +108,7 @@ export default function RegisterPage() {
         <div className="border-b-2 border-white mt-2.5 -mx-6" />
       </div>
 
-      {/* ── Form content – 354px wide ── */}
+      {/* ── Form content – 354px wide ── }
       <div className="w-full max-w-88.5">
         <h2 className="font-display text-2xl font-medium text-white mb-6 pt-42 pb-6">
           Opret bruger
@@ -158,4 +158,4 @@ export default function RegisterPage() {
       </div>
     </main>
   );
-}
+} */

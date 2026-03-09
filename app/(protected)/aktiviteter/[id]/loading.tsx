@@ -1,4 +1,4 @@
-
+/* 
 
 export default function ActivityDetailLoading() {
   return (
@@ -10,4 +10,4 @@ export default function ActivityDetailLoading() {
       </div>
     </main>
   );
-}
+} */

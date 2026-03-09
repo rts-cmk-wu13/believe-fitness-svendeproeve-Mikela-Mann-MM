@@ -1,5 +1,5 @@
 
-
+/* 
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 export default function Hero() {
     return (
         <section className="relative min-h-205.75 flex flex-col items-center justify-end pb-12 overflow-hidden">
-            {/* Baggrundsbillede */}
+            {/* Baggrundsbillede }
             <div className="absolute inset-0 -z-10">
                 <Image
                     src="/images/heroimg.jpg"
@@ -20,9 +20,9 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
             </div>
 
-            {/* Logo */}
+            {/* Logo }
             <div className="absolute top-6 w-full px-6">
-                {/* Ikon centreret */}
+                {/* Ikon centreret }
                 <div className="flex justify-center mb-4 pb-8 pt-8">
                     <Image
                         src="/logo/LD-logo.png"
@@ -31,7 +31,7 @@ export default function Hero() {
                         height={64}
                     />
                 </div>
-                {/* Tekst-logo til højre */}
+                {/* Tekst-logo til højre }
                 <div className="w-full text-right">
                     <Image
                         src="/logo/logo.png"
@@ -44,7 +44,7 @@ export default function Hero() {
                 <div className="border-b-2 border-white mt-2.5 -mx-6" />
             </div>
 
-            {/* CTA + pile */}
+            {/* CTA + pile }
             <div className="flex flex-col items-center gap-4">
                 <Link href="/login" className="btn-primary text-center" style={{ width: "15rem" }}>
                     Log ind her
@@ -57,4 +57,4 @@ export default function Hero() {
             </div>
         </section>
     );
-}
+} */

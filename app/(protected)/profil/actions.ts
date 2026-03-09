@@ -1,4 +1,4 @@
-
+/* 
 
 "use server";
 
@@ -17,4 +17,4 @@ export async function deleteActivityAction(id: number): Promise<{ error?: string
   }
 
   return {};
-}
+} */

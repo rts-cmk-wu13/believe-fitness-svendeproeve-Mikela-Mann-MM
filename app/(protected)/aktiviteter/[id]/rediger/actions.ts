@@ -1,6 +1,6 @@
 
 
-"use server";
+/* "use server";
 
 import { redirect } from "next/navigation";
 import { updateActivity } from "@/lib/api";
@@ -34,4 +34,4 @@ export async function updateActivityAction(
   }
 
   redirect("/profil");
-}
+} */

@@ -1,4 +1,4 @@
-
+/* 
 
 "use server";
 
@@ -59,4 +59,4 @@ export async function loginAction(
 
   // Redirect skal være udenfor try/catch
   redirect(role === "default" ? "/aktiviteter" : "/profil");
-}
+} */

@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useActionState } from "react";
 import { getActivity } from "@/lib/api";
-import { reportError } from "@/lib/reportError";
+/* import { reportError } from "@/lib/reportError"; 
 import { updateActivityAction } from "./actions";
 import FormError from "@/components/ui/FormError";
 
@@ -42,7 +42,7 @@ export default function EditActivityPage() {
           maxParticipants: String(a.maxParticipants ?? ""),
         });
       })
-      .catch((err) => reportError(err, { page: "rediger", id }))
+      /* .catch((err) => reportError(err, { page: "rediger", id })) 
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -142,4 +142,4 @@ export default function EditActivityPage() {
       </form>
     </main>
   );
-}
+} */

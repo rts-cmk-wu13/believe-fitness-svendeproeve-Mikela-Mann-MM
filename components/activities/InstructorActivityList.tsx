@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
 import { deleteActivityAction } from "@/app/(protected)/profil/actions"
-import { reportError } from "@/lib/reportError";
+/* import { reportError } from "@/lib/reportError"; 
 import type { Activity } from "@/types";
 
 interface Props {
@@ -29,7 +29,7 @@ export default function InstructorActivityList({ activities }: Props) {
     setDeletingId(id);
     setConfirmId(null);
 
-    try {
+/*     try {
       const result = await deleteActivityAction(id);
       if (result.error) {
         setErrorId(id);
@@ -43,7 +43,7 @@ export default function InstructorActivityList({ activities }: Props) {
     } finally {
       setDeletingId(null);
     }
-  };
+  }; 
 
   if (activities.length === 0) {
     return (
@@ -113,4 +113,4 @@ export default function InstructorActivityList({ activities }: Props) {
       ))}
     </ul>
   );
-}
+} */

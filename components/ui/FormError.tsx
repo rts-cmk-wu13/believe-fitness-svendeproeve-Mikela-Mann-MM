@@ -1,5 +1,5 @@
 
-
+/* 
 import { ContactFormErrors } from "@/types";
 
 export default function FormError({ message }: Pick<ContactFormErrors, "message">) {
@@ -9,4 +9,4 @@ export default function FormError({ message }: Pick<ContactFormErrors, "message"
       {message}
     </p>
   );
-}
+} */

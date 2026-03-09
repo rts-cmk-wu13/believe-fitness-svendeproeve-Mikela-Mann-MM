@@ -1,6 +1,6 @@
 
 
-import BottomNav from "@/components/ui/BottomNav";
+/* import BottomNav from "@/components/ui/BottomNav";
 
 export default function ProtectedLayout({
     children,
@@ -13,4 +13,4 @@ export default function ProtectedLayout({
         <BottomNav />
         </>
     );
-}
+} */

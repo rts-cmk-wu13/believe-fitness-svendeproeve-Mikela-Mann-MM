@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -18,7 +18,7 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
 
   return (
     <section className="relative px-8 py-16 text-center text-white overflow-hidden">
-      {/* Baggrundsbillede med opacity */}
+      {/* Baggrundsbillede med opacity }
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -65,4 +65,4 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
       </div>
     </section>
   );
-}
+} */

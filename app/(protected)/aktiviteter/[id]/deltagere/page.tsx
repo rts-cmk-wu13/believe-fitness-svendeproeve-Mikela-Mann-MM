@@ -1,4 +1,4 @@
-
+/* 
 
 import { redirect } from "next/navigation";
 import { User } from "lucide-react";
@@ -26,14 +26,14 @@ export default async function ParticipantsPage({ params }: Props) {
   return (
     <main className="page-content">
 
-      {/* ── Top bar ── */}
+      {/* ── Top bar ── }
       <div className="bg-(--brand-dark) px-4 py-5 text-center">
         <h1 className="text-white text-lg font-medium">
           Min profil
         </h1>
       </div>
 
-      {/* ── Profil header ── */}
+      {/* ── Profil header ── }
       <div className="bg-(--grey-light) px-4 py-7 text-center">
         <div className="w-14 h-14 rounded-full bg-(--brand-dark) flex items-center justify-center mx-auto mb-3">
           <User size={28} color="var(--grey-mid)" />
@@ -46,7 +46,7 @@ export default async function ParticipantsPage({ params }: Props) {
         </p>
       </div>
 
-      {/* ── Deltagerliste  ── */}
+      {/* ── Deltagerliste  ── }
       <div className="bg-(--brand-dark) px-4 py-6 min-h-screen">
         <h2 className="text-white text-lg font-medium mb-1">
           {activity.name}
@@ -83,4 +83,4 @@ export default async function ParticipantsPage({ params }: Props) {
 
     </main>
   );
-}
+} */

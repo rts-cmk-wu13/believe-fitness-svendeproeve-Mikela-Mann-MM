@@ -1,5 +1,5 @@
 
-
+/* 
 "use server";
 
 import { redirect } from "next/navigation";
@@ -33,4 +33,4 @@ export async function createActivityAction(formData: FormData): Promise<{ error?
   }
 
   redirect("/profil");
-}
+} */

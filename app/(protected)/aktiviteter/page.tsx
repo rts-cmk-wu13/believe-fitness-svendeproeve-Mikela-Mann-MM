@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -36,7 +36,7 @@ export default function ActivitiesPage() {
   return (
     <main className="page-content">
 
-      {/* Sticky søgeheader */}
+      {/* Sticky søgeheader }
       <div className="sticky top-0 z-40 bg-(--brand-dark) px-4 pt-4 pb-3">
         <SearchBar value={search} onChange={setSearch} />
       </div>
@@ -75,4 +75,4 @@ export default function ActivitiesPage() {
       </div>
     </main>
   );
-}
+} */

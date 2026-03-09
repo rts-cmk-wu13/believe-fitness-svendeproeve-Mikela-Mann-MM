@@ -1,10 +1,10 @@
-
+/* 
 
 "use client";
 
 import { useState } from "react";
 import { submitContact } from "@/lib/api";
-import { reportError } from "@/lib/reportError";
+import { reportError } from "@/lib/reportError"; 
 import FormError from "@/components/ui/FormError";
 import { ContactFormErrors } from "@/types";
 
@@ -89,4 +89,4 @@ export default function ContactForm() {
       </form>
     </section>
   );
-}
+} */

@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -100,4 +100,4 @@ export default function CreateActivityPage() {
       </form>
     </main>
   );
-}
+} */

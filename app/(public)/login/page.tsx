@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -23,9 +23,9 @@ export default function LoginPage() {
   return (
     <main className="min-h-dvh flex flex-col items-center justify-center px-6 py-8 bg-(--brand-dark)">
 
-      {/* Logo */}
+      {/* Logo }
       <div className="absolute top-6 w-full px-6">
-        {/* Ikon centreret */}
+        {/* Ikon centreret }
         <div className="flex justify-center mb-4 pb-8 pt-8">
           <Image
             src="/logo/LD-logo.png"
@@ -34,7 +34,7 @@ export default function LoginPage() {
             height={64}
           />
         </div>
-        {/* Tekst-logo til højre */}
+        {/* Tekst-logo til højre }
         <div className="w-full text-right">
           <Image
             src="/logo/logo.png"
@@ -47,7 +47,7 @@ export default function LoginPage() {
         <div className="border-b-2 border-white mt-2.5 -mx-6" />
       </div>
 
-      {/* ── Form content – 354px wide ── */}
+      {/* ── Form content – 354px wide ── }
       <div className="w-full max-w-88.5">
         <h2 className="text-[1.75rem] font-normal text-white mb-5 --font-body pt-8 pb-6">
           Log ind
@@ -102,4 +102,4 @@ export default function LoginPage() {
       </div>
     </main>
   );
-}
+} */

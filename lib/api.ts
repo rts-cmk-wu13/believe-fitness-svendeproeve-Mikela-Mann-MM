@@ -1,4 +1,4 @@
-
+/* 
 
 import type {
   CreateActivityPayload,
@@ -205,4 +205,4 @@ export async function submitContact(payload: ContactPayload): Promise<void> {
 export function getAssetUrl(filename: string | undefined): string | undefined {
   if (!filename) return undefined;
   return `${BASE_URL}/assets/${filename}`;
-}
+} */

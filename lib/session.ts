@@ -1,8 +1,8 @@
 
-
+/* 
 "use client";
 
-import Cookies from "js-cookie";
+ import Cookies from "js-cookie"; 
 import type { Session } from "@/types";
 
 const COOKIE_NAME =
@@ -39,3 +39,4 @@ export function setClientSession(session: Session, rememberMe: boolean): void {
 export function clearClientSession(): void {
   Cookies.remove(COOKIE_NAME);
 }
+ */

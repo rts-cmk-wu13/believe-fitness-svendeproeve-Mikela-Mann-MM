@@ -1,4 +1,4 @@
-
+/* 
 
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import { getActivity } from "@/lib/api";
 import { getSession } from "@/lib/dal";
 import EnrollButton from "@/components/activities/EnrollButton";
 import BackButton from "@/components/ui/BackButton";
-import { enrollAction, leaveAction } from "./actions";
+/* import { enrollAction, leaveAction } from "./actions"; 
 import type { ActivityDetailPageProps } from "@/types";
 
 export default async function ActivityDetailPage({ params }: ActivityDetailPageProps) {
@@ -24,7 +24,7 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
   return (
     <main className="page-content">
 
-      {/* ── Hero image ── */}
+      {/* ── Hero image ── }
       <div className="relative h-[55vh]">
         {imageUrl ? (
           <Image
@@ -41,7 +41,7 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
 
         <BackButton />
 
-        {/* Knap overlapper bunden af billedet */}
+        {/* Knap overlapper bunden af billedet }
         {session?.role === "default" && (
           <div className="absolute bottom-0 left-0 right-0 translate-y-1/2 z-10">
             <EnrollButton
@@ -54,7 +54,7 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
         )}
       </div>
 
-      {/* ── Text content ── */}
+      {/* ── Text content ── }
       <div className="px-5 pb-8"
         style={{ paddingTop: session?.role === "default" ? "2.5rem" : "1.25rem" }}
       >
@@ -77,4 +77,4 @@ export default async function ActivityDetailPage({ params }: ActivityDetailPageP
 
     </main>
   );
-}
+} */

@@ -1,4 +1,4 @@
-
+/* 
 
 "use client";
 
@@ -36,4 +36,4 @@ export default function EnrollButton({ activityId, initialEnrolled, onEnroll, on
             {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
         </div>
     );
-}
+} */

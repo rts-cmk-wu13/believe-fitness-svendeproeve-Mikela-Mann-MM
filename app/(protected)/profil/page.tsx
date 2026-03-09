@@ -1,11 +1,11 @@
-
+/* 
 
 import { redirect } from "next/navigation";
 import { User } from "lucide-react";
 import { getUser, getActivities } from "@/lib/api";
 import { getSession } from "@/lib/dal";
 import LogoutButton from "@/components/ui/LogoutButton";
-import InstructorActivityList from "@/components/activities/InstructorActivityList";
+/* import InstructorActivityList from "@/components/activities/InstructorActivityList"; 
 import Link from "next/link";
 
 export default async function ProfilePage() {
@@ -57,7 +57,7 @@ export default async function ProfilePage() {
           )}
         </div>
 
-        {isInstructor ? (
+        {/* {isInstructor ? (
           <InstructorActivityList activities={instructorActivities} />
         ) : (user.activities ?? []).length === 0 ? (
           <p className="text-(--grey-mid) text-sm">
@@ -82,8 +82,8 @@ export default async function ProfilePage() {
               </li>
             ))}
           </ul>
-        )}
+        )} }
       </div>
     </main>
   );
-}
+} */
