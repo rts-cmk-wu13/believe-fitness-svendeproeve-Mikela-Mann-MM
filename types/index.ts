@@ -6,61 +6,83 @@
 export interface Asset {
   id: number;
   url: string;
-  filename?: string;
   createdAt?: string;
   updatedAt?: string;
 }
 
-export interface ActivityType {
+export interface TrainerSummary {
   id: number;
-  name: string;
-  description: string;
-  weekday?: string;
-  time?: string;
-  minAge?: number;
-  maxAge?: number;
-  maxParticipants?: number;
-  asset?: Asset;
+  trainerName: string;
+  createdAt?: string;
+  updatedAt?: string;
   assetId?: number;
-}
-
-export interface Activity {
-  id: number;
-  name: string;
-  weekday: string;
-  time: string;
-  description: string;
-  minAge: number;
-  maxAge: number;
-  maxParticipants?: number;
-  asset?: Asset;  
-  assetId?: number;
-  instructorId?: number;
-  users?: User[];
-}
-
-export interface ActivityProbs {
-  activity: Activity;
 }
 
 
 export interface User {
   id: number;
-  firstname: string;
-  lastname: string;
   username: string;
-  age: number;
-  role: "default" | "instructor" | "admin";
-  activities?: Activity[];
+  userFirstName: string;
+  userLastName: string;
+  role?: "default" | "instructor" | "admin";
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface FitnessClassSummary {
+  id: number;
+  className: string;
+  classDescription: string;
+  classDay: string;
+  classTime: string;
+  maxParticipants: number;
+  createdAt?: string;
+  updatedAt?: string;
+  trainerId: number;
+  assetId: number;
+}
+
+export interface FitnessClass extends FitnessClassSummary {
+  trainer?: TrainerSummary;
+  asset?: Asset;
+  users?: User[];
+}
+
+export interface Trainer {
+  id: number;
+  trainerName: string;
+  createdAt?: string;
+  updatedAt?: string;
+  assetId?: number;
+  asset?: Asset;
+  class?: FitnessClassSummary;
+}
+
+export interface NewsItem {
+  id: number;
+  title: string;
+  text: string;
+  createdAt?: string;
+  updatedAt?: string;
+  assetId?: number;
+  asset?: Asset;
 }
 
 export interface Testimonial {
   id: number;
-  content: string;
+  text: string;
   name: string;
-  occupation: string;
-  createdAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+export interface Rating {
+  id: number;
+  userId: number;
+  classId?: number;
+  rating: number;
+}
+
 
 
 
@@ -77,12 +99,14 @@ export interface AuthResponse {
   userId: number;
   token: string;
   role: "default" | "instructor" | "admin";
+  validUntil: number;
 }
 
 export interface Session {
   userId: number;
   token: string;
   role: "default" | "instructor" | "admin";
+  validUntil?: number;
   rememberMe?: boolean;
 }
 
@@ -105,23 +129,26 @@ export interface NewsletterPayload {
 }
 
 export interface RegisterPayload {
-  firstname: string;
-  lastname: string;
   username: string;
-  age: number;
   password: string;
-  role: "default";
+  userFirstName: string;
+  userLastName: string;
 }
 
-export interface CreateActivityPayload {
-  name: string;
-  description: string;
-  weekday: string;
-  time: string;
-  minAge: number;
-  maxAge: number;
+export interface CreateRatingPayload {
+  userId: number;
+  rating: number;
+} 
+
+export interface UpdateClassPayload {
+  id: number;
+  className: string;
+  classDescription: string;
+  classDay: string;
+  classTime: string;
   maxParticipants: number;
-  file?: File | null;
+  trainerId: number;
+  assetId: number;
 }
 
 export interface ContactFormErrors {
@@ -147,9 +174,9 @@ export interface ActivityDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
-export interface EnrollButtonProps {
-  activityId: number;
+export interface EnrollClassButtonProps {
+  classId: number;
   initialEnrolled: boolean;
-  onEnroll: (activityId: number) => Promise<{ error?: string; success?: boolean }>;
-  onLeave: (activityId: number) => Promise<{ error?: string; success?: boolean }>;
+  onEnroll: (classId: number) => Promise<{ error?: string; success?: boolean }>;
+  onLeave: (classId: number) => Promise<{ error?: string; success?: boolean }>;
 }
