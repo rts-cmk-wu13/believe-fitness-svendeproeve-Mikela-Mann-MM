@@ -1,26 +1,200 @@
+
+
 @import "tailwindcss";
 
+
+/* ─── Design ───────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --brand-dark: #003147;
+  --brand-mid: #0d5078;
+  --brand-active: #1a6a9a; 
+  --error: #dc2626;
+
+
+
+/* Greys */
+ --grey-light: #E9E9E9;
+ --grey-mid: #999999;
+ --grey-dark: #6F6F6F;
+ --grey-border: #E0E0E0;
+ --grey-card: #EAEAEA;
+ --warm-light: #EBECDF;
+
+ /* Absolute */
+ --black: #000000;
+ --white: #FFFFFF;
+
+ /* Activitycard overlay */
+ --card-overlay: rga(0,49,71,0.75);
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--brand-dark);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+/* ─── App shell ───────────────────────────────────────────────────────────── */
+#app-shell {
+  max-width: 25.6875rem; /* 411px */
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-content {
+  padding-bottom: calc(4.125rem + 1rem);
+}
+
+/* ─── Content wrapper ─────────────────────────────────────────────────────── */
+
+.content-wrapper {
+  padding-inline: 2.5rem; /* 40px × 2 → 356px indhold på en 436px shell */
+}
+
+.content-wrapper--narrow {
+  padding-inline: 2.375rem; /* 38px × 2 → 354px indhold */
+}
+
+/* ─── Activity card ───────────────────────────────────────────────────────── */
+
+.activity-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  width: 22.5rem;   
+  height: 21.5rem;
+  display: block;
+}
+
+.activity-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.activity-card:hover img {
+  transform: scale(1.03);
+}
+
+.activity-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, var(--card-overlay) 0%, transparent 100%);
+}
+
+
+/* ─── Inputs ──────────────────────────────────────────────────────────────── */
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--grey-light);
+  color: var(--brand-dark);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border: none;
+  outline: none;
+}
+
+.form-input:focus {
+  outline: 0.125rem solid var(--brand-mid);
+  outline-offset: 0;
+}
+
+.form-input::placeholder {
+  color: var(--grey-mid);
+}
+
+/* ─── Primary button ──────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  color: var(--brand-dark);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background-color: var(--grey-light);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.9; }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ─── Bottom navigation ───────────────────────────────────────────────────── */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 26.875rem;
+  height: 4.125rem; /* 66px */
+  background-color: var(--grey-light);
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  z-index: 50;
+}
+
+/* ─── Search bar ──────────────────────────────────────────────────────────── */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--brand-mid);
+  color: var(--white);
+  width: 100%;
+}
+
+.search-bar input {
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  color: var(--white);
+  border: none;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Hold / profile card ─────────────────────────────────────────────────── */
+
+/* Overej at fjerene noget styling fra globalt til direkte på componentet */
