@@ -7,7 +7,7 @@
 
 :root {
   /* Brand */
-  --brand-yellow: #003147;
+  --brand-yellow: #F1C40E;
   --brand-yellow-dark: #0d5078;
   --brand-black: #1a6a9a; 
 
@@ -70,38 +70,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-inline: 1.5rem;
 }
 
-/* ─── Class card ───────────────────────────────────────────────────────── */
-
-.class-card {
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  cursor: pointer;
-  display: block;
-  flex-shrink: 0;
-}
-
-/* .activity-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.activity-card:hover img {
-  transform: scale(1.03);
-} */
-
-.class-card-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.75rem;
-  background-color: var(--brand-yellow);
-  border-radius: 0 0 1rem 1rem;
-}
-
 
 /* ─── Inputs ──────────────────────────────────────────────────────────────── */
 
@@ -135,69 +103,122 @@ textarea.form-input {
 /* ─── Primary button ──────────────────────────────────────────────────────── */
 
 .btn-primary {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 0.8rem 1.5rem;
-  border-radius: 0.75rem;
-  font-weight: 500;
-  color: var(--brand-dark);
-  font-size: 0.95rem;
+  padding: 0.9375rem 1.5rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
   font-family: var(--font-body);
-  background-color: var(--grey-light);
+  letter-spacing: 0.04em;
+  color: var(--brand-black);
+  background-color: var(--brand-yellow);
   border: none;
   cursor: pointer;
   text-align: center;
-  transition: opacity 0.2s;
+  text-decoration: none;
+  transition: background-color 0.2s opacity 0.2s;
 }
 
-.btn-primary:hover { opacity: 0.9; }
-.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-primary:hover { 
+  background-color: var(--brand-yellow-dark); 
+}
 
-/* ─── Bottom navigation ───────────────────────────────────────────────────── */
+.btn-primary:disabled { 
+  opacity: 0.55; 
+  cursor: not-allowed; 
+}
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* ─── Scondary button ──────────────────────────────────────────────────────── */
+
+.btn-secondary {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  max-width: 26.875rem;
-  height: 4.125rem; /* 66px 
-  background-color: var(--grey-light);
-  border-top: 0.0625rem solid rgba(255, 255, 255, 0.1);
-  z-index: 50;
-}
-
-/* ─── Search bar ──────────────────────────────────────────────────────────── */
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  background-color: var(--brand-mid);
-  color: var(--white);
-  width: 100%;
-}
-
-.search-bar input {
-  background: transparent;
-  outline: none;
-  flex: 1;
-  font-size: 0.875rem;
+  padding: 0.9375rem 1.5rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
   font-family: var(--font-body);
-  color: var(--white);
-  border: none;
+  letter-spacing: 0.04em;
+  color: var(--brand-black);
+  background-color: transparent;
+  border: 1.5px solid var(--brand-black);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
 }
 
-.search-bar input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+.btn-secondary:hover { 
+  background-color: var(--grey-light)
+ }
+
+
+/* ─── Class card ───────────────────────────────────────────────────────── */
+
+.class-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
 }
 
-/* ─── Hold / profile card ─────────────────────────────────────────────────── */
+/* .activity-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
 
-/* Overej at fjerene noget styling fra globalt til direkte på componentet */ 
+.activity-card:hover img {
+  transform: scale(1.03);
+} */
+
+.class-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  background-color: var(--brand-yellow);
+  border-radius: 0 0 1rem 1rem;
+}
+
+
+/* ─── Header ───────────────────────────────────────────────────── */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--white);
+}
+
+/* ─── Nav menu overlay ──────────────────────────────────────────────────────────── */
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--white);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+/* ─── Profile card ─────────────────────────────────────────────────── */
+
+.profile-card {
+  border: 1.5px solid var(--grey-border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}

@@ -8,7 +8,7 @@ import "./globals.css";
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "900"],
   variable: "--font-body",
-  display: "swap", //browser viser med det samme en fallback font - og swapper til Ubuntu, så snart den er loadet
+  display: "swap", //browser viser med det samme en fallback font - og swapper til Poppins, så snart den er loadet
   //Det hjælper også på Core Web Vitals-scoren (FCP — First Contentful Paint).
 }) 
 
