@@ -3,8 +3,9 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { loginUser } from "@/lib/api/auth";
+import { loginUser, getUser } from "@/lib/api/auth";
 import { setSession } from "@/lib/session";
+import { getUserById } from "@/lib/api/users";
 
 export type LoginState = {
   values: { username: string; password: string };
@@ -23,10 +24,10 @@ export async function loginAction(
   const errors: LoginState["errors"] = {};
 
   if (!username.trim()) 
-    errors.username = "Brugernavn er påkrævet";
+    errors.username = "Username is required";
 
   if (!password) 
-    errors.password = "Adgangskode er påkrævet";
+    errors.password = "Password is required";
 
   if (Object.keys(errors).length > 0) {
     return { 
@@ -39,7 +40,8 @@ export async function loginAction(
   let role: string;
 
   try {
-    const auth = await loginUser(username, password);
+    const auth = await loginUser({ username, password });
+    const user = await getUserById(auth.userId, auth.token);
 
     await setSession(
       { 
@@ -47,17 +49,18 @@ export async function loginAction(
         token: auth.token,
         role: auth.role,
         validUntil: auth.validUntil,
+        userFirstName: user.userFirstName ?? "",
+        userLastName: user.userLastName ?? "",
+        username: user.username,
         rememberMe, 
-      },
-      rememberMe
-    );
+      });
 
     role = auth.role;
   } catch {
     return {
       values: { username, password },
       errors: { 
-        general: "Forkert brugernavn eller adgangskode" 
+        general: "Incorrect username or password" 
       },
     };
   }

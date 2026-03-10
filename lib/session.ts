@@ -38,7 +38,7 @@ export async function getSession(): Promise<Session | null> {
   }
 }
 
-export async function setSession(session: Session, rememberMe: false): Promise<void> {
+export async function setSession(session: Session): Promise<void> {
   const cookieStore = await cookies();
 
   cookieStore.set(COOKIE_NAME, encodeSession(session), {
@@ -46,7 +46,7 @@ export async function setSession(session: Session, rememberMe: false): Promise<v
     sameSite: "strict",
     path: "/", 
     secure: process.env.NODE_ENV === "production",
-    ...(rememberMe
+    ...(session.rememberMe
       ? { expires: new Date(Date.now() + REMEMBER_ME_DAYS * 24 * 60 * 60 * 1000) }
       : {}),
   });
