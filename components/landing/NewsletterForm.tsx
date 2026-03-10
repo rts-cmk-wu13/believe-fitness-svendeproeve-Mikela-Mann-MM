@@ -48,8 +48,8 @@ export default function NewsletterForm() {
 
   return (
     <section className="content-wrapper py-8">
-      <h2 className="text-2xl font-bold text-white mb-2 pb-2">Sign up for our newsletter</h2>
-      <p className="text-white/60 text-sm mb-5 leading-relaxed pb-3">
+      <h2 className="text-2xl font-bold text-black mb-2 pb-2">Sign up for our newsletter</h2>
+      <p className="text-black/60 text-sm mb-5 leading-relaxed pb-3">
         Sign up to receive the latest news and announcements from Believe Fitness.
       </p>
       <form onSubmit={handleSubmit} noValidate>
@@ -67,7 +67,7 @@ export default function NewsletterForm() {
             disabled={loading}
             className="btn-primary w-auto! px-5 shrink-0" //husk at fjerne important - det skal fikses!!!!!!
           >
-            {loading ? "…" : "Sign up"}
+            {loading ? "…" : "SIGN UP"}
           </button>
         </div>
         <FormError message={error} />

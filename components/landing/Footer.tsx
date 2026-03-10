@@ -6,7 +6,7 @@ export default function Footer() {
       {/* "Logo" */}
 
 
-      <p className="text-2xl font-black leading-tight mb-1 text-(--barnd-yellow)">
+      <p className="text-2xl font-black leading-tight mb-1 text-(--brand-yellow)">
         Believe Fitness
       </p>
       <p className="text-sm font-bold mb-6 text-(--brand-black)">

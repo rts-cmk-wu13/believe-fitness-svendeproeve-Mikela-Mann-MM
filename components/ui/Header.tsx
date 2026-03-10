@@ -16,7 +16,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   return (
     <>
     <header className="site-header">
-        <Link 
+      {/*   <Link 
         href="/home"
         className="no-underline"
         aria-label="Believe Fitness - go to home"
@@ -27,7 +27,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
             <br />
             <span className="text-(--brand-black)">Fitness</span>
            </span>
-        </Link>
+        </Link> */}
 
         <button
             type="button"

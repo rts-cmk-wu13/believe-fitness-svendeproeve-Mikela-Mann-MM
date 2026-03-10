@@ -55,20 +55,21 @@ export default function ContactForm() {
 
   return (
     <section className="content-wrapper--narrow py-10">
-      <h2 className="text-white text-2xl mb-6 pb-6">Contact us</h2>
+      <h2 className="text-black text-2xl mb-6 pb-6">Contact us</h2>
+      <p className="text-black/60 text-sm mb-5 leading-relaxed pb-3">Ask us anything about Believe Fitness!</p>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2">
         <div>
-          <input className="form-input" placeholder="Name" value={form.name} onChange={set("name")} />
+          <input className="form-input" placeholder="Enter your name..." value={form.name} onChange={set("name")} />
           <FormError message={errors.name} />
         </div>
         <div>
-          <input className="form-input" type="email" placeholder="Email" value={form.email} onChange={set("email")} />
+          <input className="form-input" type="email" placeholder="Enter your email..." value={form.email} onChange={set("email")} />
           <FormError message={errors.email} />
         </div>
         <div>
           <textarea
             className="form-input resize-none"
-            placeholder="Message"
+            placeholder="Enter your message..."
             rows={4}
             value={form.message}
             onChange={set("message")}

@@ -11,9 +11,9 @@ import NewsletterForm from "@/components/landing/NewsletterForm";
 export default async function HomePage() {
 
     const [news, testimonials] = await Promise.all([
-        getNews().catch(() => []), // Hvis hentning af nyheder fejler, returner en tom array    
-        getTestimonials().catch(() => []), // Hvis hentning af testimonials fejler, returner en tom array
-    ]);
+         getNews().catch((e) => { console.error("news:", e); return []; }),
+    getTestimonials().catch((e) => { console.error("testimonials:", e); return []; }),
+]);
 
     /*   console.log();  */
 

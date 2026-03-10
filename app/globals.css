@@ -1,15 +1,15 @@
-/* 
+
 
 @import "tailwindcss";
 
 
 /* ─── Design tokens───────────────────────────────────────────────────────── */
 
-:root {
+@theme {
   /* Brand */
   --brand-yellow: #F1C40E;
-  --brand-yellow-dark: #0d5078;
-  --brand-black: #1a6a9a; 
+  --brand-yellow-dark: #F1C40E;
+  --brand-black: #000000; 
 
 
 
@@ -26,8 +26,18 @@
  --error: #dc2626;
 
 /* Typography */
-  --font-body: "Inter", sans-serif;
+  --font-body: "Poppins", sans-serif;
   --font-display: "Poppins", sans-serif; 
+
+/* Font sizes */
+  --text-xs:   0.8rem;
+  --text-sm:   0.875rem;
+  --text-base: 0.95rem;
+  --text-lg:   1.375rem;
+  --text-xl:   1.875rem;
+
+  /* Spacing */
+  --spacing-nav: 4.125rem;
 
 }
 
