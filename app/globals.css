@@ -3,41 +3,43 @@
 @import "tailwindcss";
 
 
-/* ─── Design ───────────────────────────────────────────────────────── 
+/* ─── Design tokens───────────────────────────────────────────────────────── */
 
 :root {
-  /* Brand 
-  --brand-dark: #003147;
-  --brand-mid: #0d5078;
-  --brand-active: #1a6a9a; 
-  --error: #dc2626;
+  /* Brand */
+  --brand-yellow: #003147;
+  --brand-yellow-dark: #0d5078;
+  --brand-black: #1a6a9a; 
 
 
 
-/* Greys 
- --grey-light: #E9E9E9;
+/* Greys */
+ --grey-light: #F5F5F5;
  --grey-mid: #999999;
- --grey-dark: #6F6F6F;
+ --grey-dark: #444444;
  --grey-border: #E0E0E0;
- --grey-card: #EAEAEA;
- --warm-light: #EBECDF;
 
- /* Absolute 
+
+ /* Absolute */
  --black: #000000;
  --white: #FFFFFF;
- --card-overlay: rga(0,49,71,0.75);
+ --error: #dc2626;
+
+/* Typography */
+  --font-body: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif; 
 
 }
 
-/* ─── Reset ───────────────────────────────────────────────────────────────── 
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
-  background-color: var(--brand-dark);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--brand-black);
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -45,45 +47,41 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 700;
 }
 
-/* ─── App shell ───────────────────────────────────────────────────────────── 
+/* ─── App shell ───────────────────────────────────────────────────────────── */
 #app-shell {
-  max-width: 25.6875rem; /* 411px 
+  max-width: 25.6875rem; /* 411px */
   margin: 0 auto;
   min-height: 100dvh;
   position: relative;
   overflow-x: hidden;
+  background-color: var(--white);
 }
 
 .page-content {
-  padding-bottom: calc(4.125rem + 1rem);
+  padding-bottom: 3rem;
 }
 
-/* ─── Content wrapper ─────────────────────────────────────────────────────── 
+/* ─── Content wrapper ─────────────────────────────────────────────────────── */
 
 .content-wrapper {
-  padding-inline: 2.5rem; /* 40px × 2 → 356px indhold på en 436px shell 
+  padding-inline: 1.5rem;
 }
 
-.content-wrapper--narrow {
-  padding-inline: 2.375rem; /* 38px × 2 → 354px indhold 
-}
+/* ─── Class card ───────────────────────────────────────────────────────── */
 
-/* ─── Activity card ───────────────────────────────────────────────────────── 
-
-.activity-card {
+.class-card {
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
   cursor: pointer;
-  width: 22.5rem;   
-  height: 21.5rem;
   display: block;
+  flex-shrink: 0;
 }
 
-.activity-card img {
+/* .activity-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -92,42 +90,49 @@ h1, h2, h3, h4, h5, h6 {
 
 .activity-card:hover img {
   transform: scale(1.03);
-}
+} */
 
-.activity-card-label {
+.class-card-label {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
-  background: linear-gradient(to top, var(--card-overlay) 0%, transparent 100%);
+  padding: 0.75rem;
+  background-color: var(--brand-yellow);
+  border-radius: 0 0 1rem 1rem;
 }
 
 
-/* ─── Inputs ──────────────────────────────────────────────────────────────── 
+/* ─── Inputs ──────────────────────────────────────────────────────────────── */
 
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  background-color: var(--grey-light);
-  color: var(--brand-dark);
-  font-size: 0.9rem;
+  background-color: var(--white);
+  color: var(--brand-black);
+  font-size: 0.9375rem;
   font-family: var(--font-body);
   font-weight: 400;
-  border: none;
+  border: 1.5px solid var(--grey-border);
+  border-radius: 3rem;
   outline: none;
+  transition: border-color 0.2s;
 }
 
 .form-input:focus {
-  outline: 0.125rem solid var(--brand-mid);
-  outline-offset: 0;
+  border-color: var(--brand-black);
 }
 
 .form-input::placeholder {
   color: var(--grey-mid);
 }
 
-/* ─── Primary button ──────────────────────────────────────────────────────── 
+textarea.form-input {
+  border-radius: 1rem;
+  resize: none;
+}
+
+/* ─── Primary button ──────────────────────────────────────────────────────── */
 
 .btn-primary {
   display: block;
@@ -148,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary:hover { opacity: 0.9; }
 .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
 
-/* ─── Bottom navigation ───────────────────────────────────────────────────── 
+/* ─── Bottom navigation ───────────────────────────────────────────────────── */
 
 .bottom-nav {
   position: fixed;
@@ -166,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 50;
 }
 
-/* ─── Search bar ──────────────────────────────────────────────────────────── 
+/* ─── Search bar ──────────────────────────────────────────────────────────── */
 
 .search-bar {
   display: flex;
@@ -193,6 +198,6 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ─── Hold / profile card ─────────────────────────────────────────────────── 
+/* ─── Hold / profile card ─────────────────────────────────────────────────── */
 
 /* Overej at fjerene noget styling fra globalt til direkte på componentet */ 

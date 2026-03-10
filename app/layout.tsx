@@ -1,23 +1,23 @@
 
 
 import type { Metadata } from "next";
-/* import { Ubuntu } from "next/font/google" */
+import { Poppins } from "next/font/google"; 
 import "./globals.css";
 
-/* const ubuntu = Ubuntu({
+ const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "500", "600", "700", "900"],
   variable: "--font-body",
   display: "swap", //browser viser med det samme en fallback font - og swapper til Ubuntu, så snart den er loadet
   //Det hjælper også på Core Web Vitals-scoren (FCP — First Contentful Paint).
-}) */
+}) 
 
 export const metadata: Metadata = {
   title: {
-     template: "%s | Landrup Dans", //%s placeholder will be replaced by the page title defined in each page
-    default: "Landrup Dans"
+     template: "%s | Believe Fitness", //%s placeholder will be replaced by the page title defined in each page
+    default: "Believe Fitness"
   },
-  description: "Tilmeld dig dine favorit dansehold hos Landrup Dans",
+  description: "Train like a pro",
 };
 
 
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" /* className={ubuntu.variable} */>
+    <html lang="en" className={poppins.variable} >
       <body>
         <div id="app-shell">
         {children}
