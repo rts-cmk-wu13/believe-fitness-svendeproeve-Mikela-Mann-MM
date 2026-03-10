@@ -46,6 +46,7 @@ export interface FitnessClass extends FitnessClassSummary {
   trainer?: TrainerSummary;
   asset?: Asset;
   users?: User[];
+  ratings?: Rating[];
 }
 
 export interface Trainer {
@@ -106,6 +107,9 @@ export interface Session {
   userId: number;
   token: string;
   role: "default" | "instructor" | "admin";
+  userFirstName: string;
+  userLastName: string;
+  username: string;
   validUntil?: number;
   rememberMe?: boolean;
 }
@@ -170,7 +174,7 @@ export interface TestimonialsCarouselProps {
   testimonials: Testimonial[];
 }
 
-export interface ActivityDetailPageProps {
+export interface ClassDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
