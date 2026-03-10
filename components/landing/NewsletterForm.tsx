@@ -1,10 +1,9 @@
-/* 
+
 
 "use client";
 
 import { useState } from "react";
-import { submitNewsletter } from "@/lib/api";
-import { reportError } from "@/lib/reportError";
+import { subscribeToNewsletter } from "@/lib/api/newsletter";
 import FormError from "@/components/ui/FormError";
 
 export default function NewsletterForm() {
@@ -14,24 +13,23 @@ export default function NewsletterForm() {
   const [loading, setLoading] = useState(false);
 
   const validate = () => {
-    if (!email) return "E-mail er påkrævet";
+    if (!email) return "E-mail is required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      return "Indtast en gyldig e-mail";
+      return "Please enter a valid email address";
     return "";
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const err = validate();
     if (err) { setError(err); return; }
     setError("");
     setLoading(true);
     try {
-      await submitNewsletter({ email });
+      await subscribeToNewsletter({ email });
       setSuccess(true);
-    } catch (err) {
-      reportError(err, { email });
-      setError("Noget gik galt. Prøv igen.");
+    } catch {
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -40,19 +38,19 @@ export default function NewsletterForm() {
   if (success) {
     return (
       <section className="content-wrapper py-10">
-        <h2 className="text-2xl font-bold text-white mb-2">Nyhedsbrev</h2>
+        <h2 className="text-2xl font-bold text-white mb-2">Sign up for our newsletter</h2>
         <p className="text-sm text-green-400 mt-2">
-          ✓ Du er nu tilmeldt vores nyhedsbrev!
+          ✓ You are now subscribed to our newsletter!
         </p>
       </section>
     );
   }
 
   return (
-    <section className="content-wrapper py-10">
-      <h2 className="text-2xl font-bold text-white mb-2 pb-2">Nyhedsbrev</h2>
+    <section className="content-wrapper py-8">
+      <h2 className="text-2xl font-bold text-white mb-2 pb-2">Sign up for our newsletter</h2>
       <p className="text-white/60 text-sm mb-5 leading-relaxed pb-3">
-        Få direkte besked når vi har sæsonstart eller afholder arrangementer.
+        Sign up to receive the latest news and announcements from Believe Fitness.
       </p>
       <form onSubmit={handleSubmit} noValidate>
         <div className="flex gap-2">
@@ -60,20 +58,20 @@ export default function NewsletterForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Din e-mail"
+            placeholder="Enter your email..."
             className="form-input flex-1"
-            aria-label="E-mail"
+            aria-label="E-mail for newsletter"
           />
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-auto! px-5 shrink-0"
+            className="btn-primary w-auto! px-5 shrink-0" //husk at fjerne important - det skal fikses!!!!!!
           >
-            {loading ? "…" : "Tilmeld"}
+            {loading ? "…" : "Sign up"}
           </button>
         </div>
         <FormError message={error} />
       </form>
     </section>
   );
-} */
+} 
