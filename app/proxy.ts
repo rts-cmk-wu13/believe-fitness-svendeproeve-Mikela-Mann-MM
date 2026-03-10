@@ -1,20 +1,21 @@
-/* 
+
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import type { Session } from "@/types";
 
 const COOKIE_NAME =
-  process.env.SESSION_COOKIE_NAME ?? "landrup_session";
+  process.env.SESSION_COOKIE_NAME ?? "believe_fitness_session";
 
-const PROTECTED_PATHS = ["/aktiviteter", "/profil"];
-const AUTH_PATHS      = ["/login", "/opret-bruger"];
-const INSTRUCTOR_PATHS = ["/aktiviteter/opret", "/rediger"];
+const PROTECTED_PATHS = ["/profile"];
+const AUTH_PATHS = ["/login", "/register"];
+const INSTRUCTOR_PATHS = ["/create-class"];
 
 function getSession(req: NextRequest) {
   const raw = req.cookies.get(COOKIE_NAME)?.value;
   if (!raw) return null;
   try {
-    return JSON.parse(atob(raw)) as { role: string };
+    return JSON.parse(atob(raw)) as Session;
   } catch {
     return null;
   }
@@ -22,12 +23,12 @@ function getSession(req: NextRequest) {
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const session    = getSession(req);
+  const session = getSession(req);
   const isLoggedIn = Boolean(session);
 
   // Redirect loggede brugere væk fra auth-sider → aktiviteter
   if (isLoggedIn && AUTH_PATHS.some((p) => pathname.startsWith(p))) {
-    return NextResponse.redirect(new URL("/aktiviteter", req.url));
+    return NextResponse.redirect(new URL("/profile", req.url));
   }
 
   // Redirect ikke-loggede brugere fra beskyttede sider → login
@@ -36,13 +37,14 @@ export function proxy(req: NextRequest) {
   }
 
   // Redirect ikke-instruktører fra instruktør-sider → profil
-  if (
-    isLoggedIn &&
-    INSTRUCTOR_PATHS.some((p) => pathname.includes(p)) &&
-    session?.role !== "instructor" &&
-    session?.role !== "admin"
-  ) {
-    return NextResponse.redirect(new URL("/profil", req.url));
+  if (INSTRUCTOR_PATHS.some((p) => pathname.startsWith(p))) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+    if (session?.role !== "instructor" && session?.role !== "admin") {
+      return NextResponse.redirect(new URL("/profile", req.url));
+    }
+
   }
 
   return NextResponse.next();
@@ -51,8 +53,8 @@ export function proxy(req: NextRequest) {
 export const config = {
   matcher: [
     "/login",
-    "/opret-bruger",
-    "/aktiviteter/:path*",
-    "/profil/:path*",
+    "/register",
+    "/profile/:path*",
+    "/create-class/:path*",
   ],
-}; */
+}; 
