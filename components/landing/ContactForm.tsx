@@ -1,10 +1,10 @@
-/* 
+
 
 "use client";
 
 import { useState } from "react";
-import { submitContact } from "@/lib/api";
-import { reportError } from "@/lib/reportError"; 
+import { sendMessage } from "@/lib/api/message";
+import { reportError } from "@/lib/reportError";  
 import FormError from "@/components/ui/FormError";
 import { ContactFormErrors } from "@/types";
 
@@ -16,11 +16,11 @@ export default function ContactForm() {
 
   const validate = (): ContactFormErrors => {
     const e: ContactFormErrors = {};
-    if (!form.name.trim()) e.name = "Navn er påkrævet";
-    if (!form.email.trim()) e.email = "E-mail er påkrævet";
+    if (!form.name.trim()) e.name = "Name is required";
+    if (!form.email.trim()) e.email = "E-mail is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      e.email = "Ugyldig e-mail";
-    if (!form.message.trim()) e.message = "Besked er påkrævet";
+      e.email = "Invalid e-mail";
+    if (!form.message.trim()) e.message = "Message is required";
     return e;
   };
 
@@ -31,11 +31,11 @@ export default function ContactForm() {
     setErrors({});
     setLoading(true);
     try {
-      await submitContact(form);
+      await sendMessage(form);
       setSuccess(true);
     } catch (err) {
-      reportError(err, { form });
-      setErrors({ general: "Noget gik galt. Prøv igen." });
+      /* reportError(err, { form });  */ // skal rettes til senere !!!!
+      setErrors({ general: "Something went wrong. Please try again." });
     } finally {
       setLoading(false);
     }
@@ -47,18 +47,18 @@ export default function ContactForm() {
   if (success) {
     return (
       <section className="content-wrapper--narrow py-10">
-        <h2 className="text-2xl font-bold text-white mb-2">Kontakt os</h2>
-        <p className="text-green-600 font-medium text-sm">✓ Tak for din besked! Vi vender tilbage snart.</p>
+        <h2 className="text-2xl font-bold text-white mb-2">Contact us</h2>
+        <p className="text-green-600 font-medium text-sm">✓ Thank you for your message! We will get back to you soon.</p>
       </section>
     );
   }
 
   return (
     <section className="content-wrapper--narrow py-10">
-      <h2 className="text-white text-2xl mb-6 pb-6">Kontakt os</h2>
+      <h2 className="text-white text-2xl mb-6 pb-6">Contact us</h2>
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2">
         <div>
-          <input className="form-input" placeholder="Navn" value={form.name} onChange={set("name")} />
+          <input className="form-input" placeholder="Name" value={form.name} onChange={set("name")} />
           <FormError message={errors.name} />
         </div>
         <div>
@@ -68,7 +68,7 @@ export default function ContactForm() {
         <div>
           <textarea
             className="form-input resize-none"
-            placeholder="Besked"
+            placeholder="Message"
             rows={4}
             value={form.message}
             onChange={set("message")}
@@ -83,10 +83,10 @@ export default function ContactForm() {
             className="btn-primary"
             style={{ width: "15rem", height: "3.3125rem" }}
           >
-            {loading ? "Sender…" : "Send besked"}
+            {loading ? "Sending…" : "Send Message"}
           </button>
         </div>
       </form>
     </section>
   );
-} */
+} 
