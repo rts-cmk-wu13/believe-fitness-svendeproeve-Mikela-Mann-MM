@@ -28,7 +28,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
                                     alt={item.title}
                                     fill
                                     className="object-cover"
-                                    sizes="100vw" /*eller 411px  */
+                                    sizes="100vw" /*eller 411px evt ret!!!!!*/
                                 />
                             </div>
                         )}

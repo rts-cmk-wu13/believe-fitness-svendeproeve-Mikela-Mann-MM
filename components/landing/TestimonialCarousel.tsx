@@ -1,4 +1,4 @@
-/* 
+
 
 "use client";
 
@@ -11,58 +11,44 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
 
   if (!testimonials.length) return null;
 
-  const prev = () =>
-    setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
-  const next = () => setIndex((i) => (i + 1) % testimonials.length);
   const t = testimonials[index];
 
+  const prev = () => setIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+  const next = () => setIndex((i) => (i + 1) % testimonials.length);
+
+
   return (
-    <section className="relative px-8 py-16 text-center text-white overflow-hidden">
-      {/* Baggrundsbillede med opacity }
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: "url('/images/detsigerkunderne.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+    <section className="content-wrapper py-8 border-t border-[var(--grey-border)]">
+      <h2 className="text-xl font-bold mb-6 text-center">
+        A word from<br />other Believers
+      </h2>
 
-      <div className="relative z-10 max-w-sm mx-auto flex flex-col items-center gap-8">
-        <h2 className="font-display text-2xl font-bold leading-tight">
-          Det siger vores<br />kunder om os
-        </h2>
-
+      <div className="rounded-2xl p-6 text-center bg-[var(--grey-light)]">
         <p className="text-base leading-relaxed">
-          {t.content}
+          {t.text}
         </p>
-
-        <div>
-          <p className="font-display font-bold text-lg">{t.name}</p>
-          {t.occupation && (
-            <p className="text-sm text-white/70 mt-0.5">{t.occupation}</p>
-          )}
-        </div>
-
-        {testimonials.length > 1 && (
-          <div className="flex gap-4">
-            <button
-              onClick={prev}
-              aria-label="Forrige"
-              className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center hover:bg-white/10 transition"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={next}
-              aria-label="Næste"
-              className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center hover:bg-white/10 transition"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        )}
+        <p className="font-bold text-sm">{t.name}</p>
       </div>
-    </section>
+
+
+      {testimonials.length > 1 && (
+        <div className="flex items-center justify-center gap-4 mt-4">
+          <button
+            onClick={prev}
+            aria-label="Previous testimonial"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--grey-border)] text-[var(--brand-black)] hover:bg-white/10 transition" 
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Next testimonial"
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--grey-border)] text-[var(--brand-black)] hover:bg-white/10 transition" 
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      )}
+    </section >
   );
-} */
+} 
