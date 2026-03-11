@@ -1,4 +1,4 @@
-/* 
+
 
 "use client";
 
@@ -10,10 +10,10 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      aria-label="Tilbage"
+      aria-label="Previous page"
       className="absolute left-4 top-4 flex items-center justify-center rounded-full bg-black/40 p-2 text-white border-none cursor-pointer"
     >
       <ArrowLeft size={20} />
     </button>
   );
-} */
+} 
