@@ -1,11 +1,17 @@
-/* 
+
 
 "use client";
 
 import { useState } from "react";
-import { EnrollButtonProps } from "@/types";
+import { enrollAction, leaveAction } from "@/lib/actions";
+import { reportError } from "@/lib/reportError";
 
-export default function EnrollButton({ activityId, initialEnrolled, onEnroll, onLeave }: EnrollButtonProps) {
+interface EnrollButtonProps {
+    classId: number;
+    initialEnrolled: boolean;
+}
+
+export default function EnrollButton({ classId, initialEnrolled }: EnrollButtonProps) {
     const [enrolled, setEnrolled] = useState(initialEnrolled);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -13,10 +19,17 @@ export default function EnrollButton({ activityId, initialEnrolled, onEnroll, on
     const handleClick = async () => {
         setLoading(true);
         setError("");
-        const result = enrolled ? await onLeave(activityId) : await onEnroll(activityId);
-        if (result.error) setError(result.error);
-        else setEnrolled((e) => !e);
-        setLoading(false);
+        try {
+            const result = enrolled ? await leaveAction(classId) : await enrollAction(classId);
+
+            if (result.error) setError(result.error);
+            else setEnrolled((e) => !e);
+        } catch (err) {
+            reportError(err, "EnrollButton");
+            setError("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -31,9 +44,9 @@ export default function EnrollButton({ activityId, initialEnrolled, onEnroll, on
                     ${loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}
                 `}
             >
-                {loading ? "Vent…" : enrolled ? "Forlad hold" : "Tilmeld"}
+                {loading ? "..." : enrolled ? "LEAVE CLASS" : "SIGN UP"}
             </button>
             {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
         </div>
     );
-} */
+} 
