@@ -12,7 +12,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
 
     return (
         <section className="content-wrapper py-6">
-            <h2 className="text-2xl font-black mb-6 text-[var(--brand-yellow)]">
+            <h2 className="text-2xl font-black mb-6 text-(--brand-yellow)]">
                 News
             </h2>
             <div className="flex flex-col gap-8">
@@ -32,10 +32,10 @@ export default function NewsSection({ news }: NewsSectionProps) {
                                 />
                             </div>
                         )}
-                        <p className="text-sm leading-relaxed text-[var(--grey-dark)]">
+                        <p className="text-sm leading-relaxed text-(--grey-dark)]">
                             {item.text}
                         </p>
-                        <hr className="mt-8 border-[var(--grey-border)]" />
+                        <hr className="mt-8 border-(--grey-border)]" />
                     </article>
                 ))}
             </div>

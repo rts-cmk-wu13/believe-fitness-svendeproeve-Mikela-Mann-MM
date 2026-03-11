@@ -18,12 +18,12 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
 
 
   return (
-    <section className="content-wrapper py-8 border-t border-[var(--grey-border)]">
+    <section className="content-wrapper py-8 border-t border-(--grey-border)]">
       <h2 className="text-xl font-bold mb-6 text-center">
         A word from<br />other Believers
       </h2>
 
-      <div className="rounded-2xl p-6 text-center bg-[var(--grey-light)]">
+      <div className="rounded-2xl p-6 text-center bg-(--grey-light)]">
         <p className="text-base leading-relaxed">
           {t.text}
         </p>
@@ -36,14 +36,14 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
           <button
             onClick={prev}
             aria-label="Previous testimonial"
-            className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--grey-border)] text-[var(--brand-black)] hover:bg-white/10 transition" 
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-(--grey-border)] text-(--brand-black)] hover:bg-white/10 transition" 
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={next}
             aria-label="Next testimonial"
-            className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--grey-border)] text-[var(--brand-black)] hover:bg-white/10 transition" 
+            className="w-10 h-10 rounded-full flex items-center justify-center border border-(--grey-border)] text-(--brand-black)] hover:bg-white/10 transition" 
           >
             <ChevronRight size={20} />
           </button>
