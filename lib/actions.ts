@@ -8,6 +8,7 @@ import { getSession, setSession, clearSession } from "./session";
 import { loginUser, getUser } from "./api/auth";
 import { registerUser } from "./api/users";
 import {
+  createClass,
   enrollInClass,
   leaveClass,
   deleteClass,
@@ -76,6 +77,37 @@ export const initialRegisterState: RegisterState = {
   errors: {},
 };
 
+// ─── State-typer til useActionState ──────────────────────────────────────────
+
+export interface CreateClassState {
+  values: {
+    className: string;
+    classDescription: string;
+    classDay: string;
+    classTime: string;
+    maxParticipants: number;
+    trainerId: number;
+    assetId: number;
+  };
+  errors: {
+    className?: string;
+    general?: string;
+  };
+}
+
+export const initialCreateClassState: CreateClassState = {
+  values: {
+    className: "",
+    classDescription: "",
+    classDay: "Monday",
+    classTime: "09:00",
+    maxParticipants: 12,
+    trainerId: 0,
+    assetId: 1,
+  },
+  errors: {},
+};
+
 // ─── Validering ───────────────────────────────────────────────────────────────
 
 function validateRegister(
@@ -100,6 +132,25 @@ function validateRegister(
   return e;
 }
 
+function validateClass(
+  values: CreateClassState["values"]
+): CreateClassState["errors"] {
+  const e: CreateClassState["errors"] = {};
+  if (!values.className.trim()) e.className = "Class name is required";
+  return e;
+}
+
+function parseClassFormData(formData: FormData): CreateClassState ["values"] {
+  return {
+    className: (formData.get("className") as string) ?? "",
+    classDescription: (formData.get("classDescription") as string) ?? "",
+    classDay: (formData.get("classDay") as string) ?? "Monday",
+    classTime: (formData.get("classTime") as string) ?? "09:00",
+    maxParticipants: Number(formData.get("maxParticipants")) || 12,
+    trainerId: Number(formData.get("trainerId")) || 0,
+    assetId: Number(formData.get("assetId")) || 1,
+  };
+}
 
 // ─── Auth ────────────────────────────────────────────────────────────────
 
@@ -251,4 +302,49 @@ export async function updateClassAction(
     reportError(err, "updateClassAction");
     return { error: "Could not update class" };
   }
+}
+
+export async function createClassAction(
+  prevState: CreateClassState,
+  formData: FormData
+): Promise<CreateClassState> {
+  const values = parseClassFormData(formData);
+  const errors = validateClass(values);
+  if (Object.keys(errors).length > 0) return { values, errors };
+
+  try {
+    const session = await requireSession();
+    requireInstructor(session.role);
+    await createClass(values, session.token);
+  } catch (err) {
+    reportError(err, "createClassAction");
+    return { values, errors: { general: "Could not create class. Please try again." } };
+  }
+
+  revalidatePath("/profile");
+  redirect("/profile");
+}
+
+export async function updateClassActionState(
+  prevState: CreateClassState,
+  formData: FormData
+): Promise<CreateClassState> {
+  const values = parseClassFormData(formData);
+  const errors = validateClass(values);
+  if (Object.keys(errors).length > 0) return { values, errors };
+
+  const classId = Number(formData.get("id"));
+
+  try {
+    const session = await requireSession();
+    requireInstructor(session.role);
+    await updateClass(classId, { id: classId, ...values }, session.token);
+    revalidatePath("/profile");
+    revalidatePath(`/classes/${classId}`);
+  } catch (err) {
+    reportError(err, "updateClassActionState");
+    return { values, errors: { general: "Could not update class. Please try again." } };
+  }
+
+  redirect("/profile");
 }

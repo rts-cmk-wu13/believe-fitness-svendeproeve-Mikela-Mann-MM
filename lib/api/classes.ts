@@ -42,3 +42,10 @@ export function leaveClass(classId: number | string, userId: number, token?: str
     });
 }
 
+export function createClass(data: Omit<UpdateClassPayload, "id">, token?: string): Promise<FitnessClass> {
+    return apiFetch("/api/v1/classes", {
+        method: "POST",
+        token,
+        body: JSON.stringify(data),
+    });
+}
