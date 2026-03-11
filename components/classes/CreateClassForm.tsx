@@ -26,19 +26,19 @@ export default function CreateClassForm({ trainers, existingClass }: Props) {
 
  const initialState: CreateClassState = existingClass ? {
     values: {
-        className:className
-        classDescription:classDescription
-        classDay:
-        classTime:
-        maxParticipants:
-        trainerId:
-        assetId:
+        className: existingClass.className,
+        classDescription: existingClass.classDescription,
+        classDay: existingClass.classDay,
+        classTime: existingClass.classTime,
+        maxParticipants: existingClass.maxParticipants,
+        trainerId: existingClass.trainerId,
+        assetId: existingClass.assetId,
     },
     errors: {},
  }
- :initialCreateClassState
+ : initialCreateClassState;
 
- const action = isEdit ? updateClassAction : createClassAction;
+ const action = isEdit ? updateClassActionState : createClassAction;
 
   const [state, formAction, isPending] = useActionState<CreateClassState, FormData>(
     action,
@@ -46,78 +46,90 @@ export default function CreateClassForm({ trainers, existingClass }: Props) {
   );
 
   return (
-      <form action={formAction} noValidate className="flex flex-col gap-3">
+      <form action={formAction} noValidate className="flex flex-col gap-4">
+     {isEdit && <input type="hidden" name="id" value={existingClass!.id} />}
+      <input type="hidden" name="assetId" value={existingClass?.assetId ?? 1} />
 
         <div>
-          <input className="form-input" name="name" placeholder="Holdnavn" />
+            <label className="text-sm font-medium block mb-1">Class name</label>
+          <input 
+          type="text" 
+          name="className"
+          defaultValue={state.values.className} 
+          placeholder="Class name..." 
+          className="form-input" 
+          />
+          <FormError message={state.errors.className} />
         </div>
 
-        <div>
-          <textarea
-            className="form-input resize-none"
-            style={{ minHeight: "7.5rem" }}
-            name="description"
-            placeholder="Beskrivelse"
+       <div>
+            <label className="text-sm font-medium block mb-1">Description</label>
+          <textarea 
+          name="classDescription"
+          defaultValue={state.values.classDescription} 
+          placeholder="Class Description..." 
+          rows={3}
+          className="form-input" 
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <select className="form-input" name="weekday">
-              <option value="">Ugedag</option>
-              {WEEKDAYS.map((d) => <option key={d} value={d}>{d}</option>)}
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <label className="text-sm font-medium block mb-1">Day</label>
+            <select 
+            name="classDay"
+          defaultValue={state.values.classDay} 
+          className="form-input rounded-2xl" 
+          >
+            {DAYS.map((d) => (
+                <option key={d} value={d}>{d}</option>
+            ))}
             </select>
           </div>
-          <div>
-            <input className="form-input" type="time" name="time" />
-          </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <input className="form-input" type="number" min={0} name="minAge" placeholder="Alder (min.)" />
-          </div>
-          <div>
-            <input className="form-input" type="number" min={0} name="maxAge" placeholder="Alder (max.)" />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <select className="form-input opacity-60" disabled>
-              <option>Instruktør</option>
-            </select>
-          </div>
-          <div>
-            <input className="form-input" type="number" min={1} name="maxParticipants" placeholder="Deltagere (max.)" />
+          <div className="flex-1">
+            <label className="text-sm font-medium block mb-1">Time</label>
+            <input 
+            type="time"
+            name="classTime"
+          defaultValue={state.values.classTime} 
+          className="form-input" 
+          />
           </div>
         </div>
 
         <div>
-          <p className="text-white text-sm mb-2">Billede:</p>
-          <div className="flex items-center gap-3">
-            <label className="px-4 py-2 bg-(--grey-light) rounded text-sm text-(--brand-dark) cursor-pointer whitespace-nowrap">
-              Gennemse...
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-              />
-            </label>
-            <span className="text-(--grey-mid) text-sm">
-              {file ? file.name : "Ingen fil valgt"}
-            </span>
+          <label className="text-sm font-medium block mb-1">Max participants</label>
+            <input 
+            type="number"
+            name="maxParticipants"
+            min={1}
+            max={100}
+          defaultValue={state.values.maxParticipants} 
+          className="form-input" 
+          />
           </div>
-        </div>
 
-        <FormError message={state?.error} />
+          {trainers.length > 0 && (
+            <div>
+               <label className="text-sm font-medium block mb-1">Trainer</label>
+            <select
+            name="trainerId"
+          defaultValue={state.values.trainerId} 
+          className="form-input rounded-2xl" 
+          >
+            {trainers.map((t) => (
+                <option key={t.id} value={t.id}>{t.trainerName}</option>
+            ))} 
+            </select>
+            </div>
+          )}
+
+        <FormError message={state.errors.general} />
 
         <button type="submit" disabled={isPending} className="btn-primary mt-2">
-          {isPending ? "Opretter…" : "Opret hold"}
+          {isPending ? "Saving…" : isEdit ? "SAVE CHANGES" : "CREATE CLASS"}
         </button>
-
       </form>
-   
   );
 }
