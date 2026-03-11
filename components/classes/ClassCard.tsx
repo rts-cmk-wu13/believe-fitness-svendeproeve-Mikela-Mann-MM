@@ -1,35 +1,53 @@
 
-/* 
+
 import Link from "next/link";
 import Image from "next/image";
-import type { ActivityProbs } from "@/types";
+import StarRating from "../ui/Starrating";
+import type { FitnessClassSummary, Rating } from "@/types";
 
-export default function ActivityCard({ activity }: ActivityProbs) {
-    const imageUrl = activity.asset?.url;
+interface ClassCardProps {
+    fitnessClass: FitnessClassSummary & {
+        asset?: { url: string }; ratings?:
+        Rating[]
+    };
+    width?: number;
+    height?: number;
+}
+
+
+function getAverageRating(ratings?: Rating[]): number {
+    if (!ratings || ratings.length === 0) return 0;
+    return ratings?.reduce((sum, r) => sum + r.rating, 0) / ratings?.length;
+}
+
+export default function ClassCard({ fitnessClass, width = 160, height = 200 }: ClassCardProps) {
+    const avgRating = getAverageRating(fitnessClass.ratings);
 
     return (
-        <Link href={`/aktiviteter/${activity.id}`} className="activity-card">
-            {imageUrl ? (
+        <Link href={`/classes/${fitnessClass.id}`}
+            className="class-card"
+            style={{ width, height }}
+        >
+            {/* Image */}
+            {fitnessClass.asset?.url ? (
                 <Image
-                    src={imageUrl}
-                    alt={activity.name}
+                    src={fitnessClass.asset.url}
+                    alt={fitnessClass.className}
                     fill
                     className="object-cover"
-                    sizes="26.875rem"
+                    sizes={`${width}px`}
                 />
             ) : (
-                <div className="w-full h-full bg-linear-to-br from-(--brand-dark) to-(--brand-mid)" />
+                <div className="w-full h-full bg-var(--grey-light)" />
             )}
 
-            {/* Bottom panel overlay }
-            <div className="absolute bottom-0 left-0 right-0 mx-2 mb-2 px-4 py-4 rounded-2xl bg-(--brand-dark)/80 backdrop-blur-sm">
-                <h3 className="font-semibold text-[1.0625rem] text-white leading-[1.3]">
-                    {activity.name}
-                </h3>
-                <p className="text-sm text-white/60 mt-1">
-                    {activity.weekday} kl. {activity.time}
+            {/* Label overlay */}
+            <div className="class-card-label">
+                <p className="text-sm font-bold leading-tight text-(--brand-black)">
+                    {fitnessClass.className}
                 </p>
+                <StarRating rating={avgRating} size="sm" />
             </div>
         </Link>
     );
-} */
+} 
