@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { X } from "lucide-react";
-import { logout } from "@/lib/actions/auth";
+import { logoutAction } from "@/lib/actions";
 
 interface NavMenuProps {
     isOpen: boolean;
@@ -43,7 +43,7 @@ export default function NavMenu({ isOpen, onClose, isLoggedIn }: NavMenuProps) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close navigation menu"
-                className="absolute top-5 right-6 text-[var(--grey-mid)] cursor pointer"
+                className="absolute top-5 right-6 text-(--grey-mid)] cursor pointer"
             >
                 <X size={24} />
             </button>
@@ -54,7 +54,7 @@ export default function NavMenu({ isOpen, onClose, isLoggedIn }: NavMenuProps) {
                         key={item.href}
                         href={item.href}
                         onClick={onClose}
-                        className="text-2xl font-medium text-[var(--brand-black)] no-underline"
+                        className="text-2xl font-medium text-(--brand-black)] no-underline"
                     >
                         {item.label}
                     </Link>
@@ -62,10 +62,10 @@ export default function NavMenu({ isOpen, onClose, isLoggedIn }: NavMenuProps) {
 
                 {/* Log out (kun når logget ind) */}
                 {isLoggedIn && (
-                    <form action={logout}>
+                    <form action={logoutAction}>
                         <button
                             type="submit"
-                            className="text-2xl font-medium text-[var(--brand-black)] bg-transparent border-none cursor-pointer"
+                            className="text-2xl font-medium text-(--brand-black)] bg-transparent border-none cursor-pointer"
                         >
                             Log Out
                         </button>

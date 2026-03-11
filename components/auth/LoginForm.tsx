@@ -3,7 +3,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { loginAction, initialLoginState } from "@/lib/actions";
+import { loginAction } from "@/lib/actions";
 import type { LoginState } from "@/lib/actions";
 import FormError from "@/components/ui/FormError";
 
@@ -15,7 +15,7 @@ const initialState: LoginState = {
 export default function LoginForm() {
     const [state, formAction, isPending] = useActionState<LoginState, FormData>(
     loginAction,
-    initialLoginState
+    initialState
 );
 
     return (
