@@ -35,9 +35,9 @@ export default function Header({ isLoggedIn }: HeaderProps) {
             aria-label="Open menu"
             className="flex flex-col justify-center gap-1.5 w-8 h-8"
         >
-            <span className="block h-0.5 w-full rounded-full bg-[var(--brand-black)]" />
-            <span className="block h-0.5 w-full rounded-full bg-[var(--brand-black)]" />
-            <span className="block h-0.5 w-full rounded-full bg-[var(--brand-black)]" />
+            <span className="block h-0.5 w-full rounded-full bg-(--brand-black)]" />
+            <span className="block h-0.5 w-full rounded-full bg-(--brand-black)]" />
+            <span className="block h-0.5 w-full rounded-full bg-(--brand-black)]" />
         </button>
     </header>
 
