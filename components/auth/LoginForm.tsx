@@ -3,7 +3,8 @@
 "use client";
 
 import { useActionState } from "react";
-import { loginAction } from "./actions";
+import { loginAction, initialLoginState } from "@/lib/actions";
+import type { LoginState } from "@/lib/actions";
 import FormError from "@/components/ui/FormError";
 
 const initialState: LoginState = {
@@ -13,9 +14,9 @@ const initialState: LoginState = {
 
 export default function LoginForm() {
     const [state, formAction, isPending] = useActionState<LoginState, FormData>(
-        loginAction,
-        initialState
-    );
+    loginAction,
+    initialLoginState
+);
 
     return (
         <form action={formAction} noValidate className="flex flex-col gap-4">

@@ -16,8 +16,6 @@ import {
 import { createRating } from "./api/ratings"
 import { reportError } from "./reportError";
 import type {
-  LoginPayload,
-  RegisterPayload,
   UpdateClassPayload,
   CreateRatingPayload,
 } from "@/types";
@@ -37,27 +35,104 @@ function requireInstructor(role: string) {
     throw new Error("Unauthorized");
 }
 
+// ─── State-typer til useActionState ────────────────────────────────────────────────────────────────
+
+export interface LoginState {
+  values: { username: string; password: string };
+  errors: { username?: string; password?: string; general?: string };
+}
+
+export interface RegisterState {
+  values: {
+    firstname: string;
+    lastname: string;
+    username: string;
+    password: string;
+    passwordConfirm: string;
+  };
+  errors: {
+    firstname?: string;
+    lastname?: string;
+    username?: string;
+    password?: string;
+    passwordConfirm?: string;
+    general?: string;
+  }
+}
+
+export const initialLoginState: LoginState = {
+  values: { username: "", password: "" },
+  errors: {},
+};
+
+export const initialRegisterState: RegisterState = {
+  values: {
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    passwordConfirm: "",
+  },
+  errors: {},
+};
+
+// ─── Validering ───────────────────────────────────────────────────────────────
+
+function validateRegister(
+  values: RegisterState["values"]
+): RegisterState["errors"] {
+  const e: RegisterState["errors"] = {};
+
+  if (!values.firstname.trim()) e.firstname = "First name is required";
+  if (!values.lastname.trim()) e.lastname = "Last name is required";
+
+  if (!values.username.trim()) e.username = "Username is required";
+  else if (values.username.length < 3)
+    e.username = "Username must be at least 3 characters";
+
+  if (!values.password) e.password = "Password is required";
+  else if (values.password.length < 6)
+    e.password = "Password must be at least 6 characters";
+
+  if (values.password !== values.passwordConfirm)
+    e.passwordConfirm = "Passwords do not match";
+
+  return e;
+}
+
+
 // ─── Auth ────────────────────────────────────────────────────────────────
 
 export async function loginAction(
-  payload: LoginPayload
-): Promise<ActionResult> {
-  try {
-    const res = await loginUser(payload);
+  prevState: LoginState,
+  formData: FormData
+): Promise<LoginState> {
+  const values = {
+    username: (formData.get("username") as string) ?? "",
+    password: (formData.get("password") as string) ?? "",
+  };
+
+   if (!values.username.trim())
+    return { values, errors: { username: "Username is required" } };
+  if (!values.password)
+    return { values, errors: { password: "Password is required" } };
+
+
+ try {
+    const res = await loginUser({ username: values.username, password: values.password });
     const user = await getUser(res.userId, res.token);
-    await setSession(
-      {
-        userId: res.userId,
-        token: res.token,
-        role: res.role,
-        validUntil: res.validUntil,
-        rememberMe: payload.rememberMe ?? false,
-        userFirstName: user.userFirstName,
-        userLastName: user.userLastName,
-        username: user.username,
-      });
+    await setSession({
+      userId: res.userId,
+      token: res.token,
+      role: res.role,
+      validUntil: res.validUntil,
+      rememberMe: false,
+      userFirstName: user.userFirstName,
+      userLastName: user.userLastName,
+      username: user.username,
+    });
   } catch {
-    return { error: "Invalid username or password" };
+    return { values, errors: { general: "Invalid username or password" } };
   }
 
   redirect("/profile");
@@ -69,17 +144,37 @@ export async function logoutAction(): Promise<void> {
 }
 
 export async function registerAction(
-  payload: RegisterPayload
-): Promise<ActionResult> {
+  prevState: RegisterState,
+  formData: FormData
+): Promise<RegisterState> {
+  const values: RegisterState["values"] = {
+    firstname: (formData.get("firstname") as string) ?? "",
+    lastname: (formData.get("lastname") as string) ?? "",
+    username: (formData.get("username") as string) ?? "",
+    password: (formData.get("password") as string) ?? "",
+    passwordConfirm: (formData.get("passwordConfirm") as string) ?? "",
+  };
+
+  const errors = validateRegister(values);
+  if (Object.keys(errors).length > 0) return { values, errors };
+
   try {
-    await registerUser(payload);
-  } catch {
-    return { error: "Could not create account. Username may already be taken." };
+    await registerUser({
+      userFirstName: values.firstname,
+      userLastName: values.lastname,
+      username: values.username,
+      password: values.password,
+    });
+  } catch (err) {
+    reportError(err, values.username );
+    return {
+      values,
+      errors: { general: "Could not create account. Username may already be taken." },
+    };
   }
 
-  redirect("/login");
+  redirect("/login?registered=true");
 }
-
 
 // ─── Classes ────────────────────────────────────────────────────────────────
 
