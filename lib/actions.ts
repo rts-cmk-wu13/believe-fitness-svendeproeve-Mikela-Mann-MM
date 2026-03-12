@@ -106,7 +106,9 @@ export async function loginAction(
 
   try {
     const res = await loginUser({ username: values.username, password: values.password });
+    console.log("API response:", res);
     const user = await getUser(res.userId, res.token);
+    console.log("User:", user);
     await setSession({
       userId: res.userId,
       token: res.token,
@@ -116,8 +118,9 @@ export async function loginAction(
       userFirstName: user.userFirstName,
       userLastName: user.userLastName,
       username: user.username,
-    });
+    },);console.log("Session set");
   } catch {
+    console.log("Error");
     return { values, errors: { general: "Invalid username or password" } };
   }
 

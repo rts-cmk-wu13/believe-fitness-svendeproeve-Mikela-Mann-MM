@@ -11,7 +11,7 @@ import FormError from "@/components/ui/FormError";
 
 export default function RegisterForm() {
 const [state, formAction, isPending] = useActionState<RegisterState, FormData>(
-  async (prev, formData) => registerAction(prev, formData),
+  registerAction,
   initialRegisterState
 );
 

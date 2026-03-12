@@ -11,7 +11,7 @@ export default async function ProfilePage() {
   const session = await getSession();
 if (!session) redirect("/login");
 
-const user = await getUserById(session.userId).catch(() => null);
+const user = await getUserById(session.userId, session.token).catch(() => null);
 if (!user) redirect("/login");
 
 const isInstructor = session.role === "instructor" || session.role === "admin";
@@ -31,20 +31,17 @@ aria-label="Profile page"
       </div>
       <div>
         <p className="font-bold text-lg" >
-          {fullName}
+          {user.userFirstName} {user.userLastName}
         </p>
-        <p
-          className="text-sm capitalize text-(--grey-dark)"
-          aria-label={`Role: ${roleLabel}`}
-        >
-          {roleLabel}
+        <p className="text-sm capitalize text-(--grey-dark)">
+          {isInstructor ? "Instructor" : "Member"}
         </p>
       </div>
     </div>
       </section >
 
   {/* Class list*/ }
-  < section aria - label={ isInstructor ? "Classes you instruct" : "Classes you are enrolled in" }>
+  <section>
     {
       isInstructor?(
           <InstructorClassList classes = {(user as any).classes ?? []} />

@@ -3,11 +3,22 @@
 import Link from "next/link";
 import LoginForm from "@/components/auth/LoginForm";
 
-export default function LoginPage() {
-  
+interface Props {
+  searchParams: Promise<{ registered?: string }>;
+}
+
+export default async function LoginPage({ searchParams }: Props) {
+  const { registered } = await searchParams;
+
   return (
     <main className="content-wrapper py-12 flex flex-col min-h-dvh"
     aria-labelledby="page-title">
+
+      {registered && (
+        <p className="text-sm text-center mb-4" style={{ color: "#16a34a" }}>
+          Account created! You can now log in.
+        </p>
+      )}
 
       {/* Brand */}
       <div className="mb-10" role="banner">

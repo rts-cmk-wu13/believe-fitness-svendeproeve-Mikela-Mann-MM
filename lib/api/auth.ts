@@ -16,10 +16,3 @@ export async function getUser(userId: number, token: string): Promise<User> {
     token,
   });
 }
-
-/* export async function logoutUser(token: string): Promise<void> {
-  return apiFetch("/api/v1/auth/logout", {
-    method: "POST",
-    token,
-  });
-} */

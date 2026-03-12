@@ -54,7 +54,9 @@ export const config = {
   matcher: [
     "/login",
     "/register",
+    "/profile",
     "/profile/:path*",
+    "/create-class",
     "/create-class/:path*",
   ],
 }; 

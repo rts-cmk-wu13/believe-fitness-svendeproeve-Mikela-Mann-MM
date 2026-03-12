@@ -22,7 +22,7 @@ export default function LoginForm() {
                     type="text"
                     name="username"
                     defaultValue={state.values.username}
-                    placeholder="Enter your email..."
+                    placeholder="Enter your username..."
                     className="form-input"
                     autoComplete="username"
                 />
