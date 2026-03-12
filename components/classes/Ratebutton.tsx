@@ -19,9 +19,9 @@ export default function RateButton({ classId, userId, className }: RateButtonPro
         <button
             onClick={() => setOpen(true)}
             aria-label={`Rate ${className}`}
-            className="px-5 py-2 rounded-full text-sm font-bold tracking-wide border-[1.5px] border-(--brand-yellow) text-(--brand-yellow) bg-transparent cursor-pointer"
+            className="px-5 py-2.5 rounded-full text-xs font-extrabold tracking-wide border-2 border-(--brand-yellow) text-(--brand-yellow) bg-transparent cursor-pointer uppercase"
         >
-            RATE CLASS
+            RATE 
         </button>
         {open && (
             <RatingModal

@@ -4,13 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { getClasses } from "@/lib/api/classes";
 import ClassCarousel from "@/components/classes/ClassCarousel";
-import StarRating from "@/components/ui/StarRating";
+import StarRating from "@/components/ui/Starrating";
 
 
 export default async function ClassesPage() {
     const classes = await getClasses().catch(() => []);
-    const featured = classes[0] ?? null;
-    const rest = classes.slice(1)
+
+    const featuredIndex = classes.length
+        ? Math.floor(Math.random() * classes.length)
+        : 0;
+    const featured = classes[featuredIndex] ?? null;
+    const rest = classes.filter((_, i) => i !== featuredIndex);
+
 
     const featuredRating = featured
         ? (featured as any).ratings?.length

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getClassesById } from "@/lib/api/classes"
 import { getSession } from "@/lib/session";
 import RateButton from "@/components/classes/Ratebutton";
-import StarRating from "@/components/ui/StarRating";
+import StarRating from "@/components/ui/Starrating";
 import EnrollButton from "@/components/classes/EnrollButton";
 
 interface Props {
@@ -27,6 +27,11 @@ export default async function ClassesDetailPage({ params }: Props) {
     const isEnrolled =
         session &&
         fitnessClass.users?.some((u) => u.id === session.userId) === true;
+
+// Max-deltagere nået?
+    const isFull =
+        fitnessClass.maxParticipants !== undefined &&
+        (fitnessClass.users?.length ?? 0) >= fitnessClass.maxParticipants;
 
     return (
         <main className="page-content" id="main-content">

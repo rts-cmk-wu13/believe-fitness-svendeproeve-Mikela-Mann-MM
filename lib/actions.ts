@@ -170,6 +170,34 @@ export async function registerAction(
 export async function enrollAction(classId: number): Promise<ActionResult> {
   try {
     const session = await requireSession();
+
+
+        // Hent den klasse brugeren vil tilmelde sig
+    const { getClassesById } = await import("@/lib/api/classes");
+    const { getUserById } = await import("@/lib/api/users");
+
+    const [targetClass, user] = await Promise.all([
+      getClassesById(classId),
+      getUserById(session.userId, session.token),
+    ]);
+
+    // Max-deltagere nået?
+    if (
+      targetClass.maxParticipants !== undefined &&
+      (targetClass.users?.length ?? 0) >= targetClass.maxParticipants
+    ) {
+      return { error: "This class is full" };
+    }
+
+    // er brugeren allerede tilmeldt et hold på samme ugedag?
+    const hasConflict = (user.classes ?? []).some(
+      (c) => c.classDay?.toLowerCase() === targetClass.classDay?.toLowerCase()
+    );
+    if (hasConflict) {
+      return {
+        error: `You already have a class on ${targetClass.classDay}`,
+      };
+    }
     await enrollInClass(classId, session.userId, session.token);
     revalidatePath(`/classes/${classId}`);
     revalidatePath("/profile");

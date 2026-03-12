@@ -232,3 +232,41 @@ textarea.form-input {
   border-radius: 1rem;
   padding: 1.25rem;
 }
+
+/* ─── Slider ─────────────────────────────────────────────────── */
+
+input[type="range"] {
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #9e9e9e;
+    border-radius: 9999px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--brand-yellow);
+    margin-top: -11px;
+}
+
+input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: #9e9e9e;
+    border-radius: 9999px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--brand-yellow);
+    border: none;
+}

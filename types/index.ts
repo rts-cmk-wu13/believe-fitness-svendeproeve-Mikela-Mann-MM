@@ -27,6 +27,7 @@ export interface User {
   role?: "default" | "instructor" | "admin";
   createdAt?: string;
   updatedAt?: string;
+  classes?: FitnessClassSummary[];
 }
 
 export interface FitnessClassSummary {

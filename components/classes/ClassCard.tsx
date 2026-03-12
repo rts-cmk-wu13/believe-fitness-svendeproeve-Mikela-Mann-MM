@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import StarRating from "../ui/StarRating";
+import StarRating from "@/components/ui/Starrating"
 import type { FitnessClassSummary, Rating } from "@/types";
 
 interface ClassCardProps {

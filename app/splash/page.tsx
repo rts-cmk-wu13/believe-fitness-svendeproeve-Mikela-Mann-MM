@@ -31,22 +31,22 @@ export default function SplashPage() {
 
             {/* Content */}
             <div className="relative content-wrapper pb-16">
-                <h1 className="text-6xl font-black leading-none mb-2 text-{--brand-yellow}">
+                <h1 className="text-6xl font-black leading-none mb-2 text-(--brand-yellow)">
                     Believe
                     <br />
                     Fitness
                 </h1>
 
-                <div className="flex items-center gap-3 mb-10">
+                <div className="flex items-center gap-3 mb-10 pb-12 pt-6">
                     <span className="block h-px w-6 bg-white" />
-                    <p className="font-bold text-base text-white">Train like a pro</p>
+                    <p className="font-bold text-lg text-white">Train like a pro</p>
                 </div>
 
                 {/* button */}
 
                 <div
                     className={[
-                        "transition-[opacity,transform] duration-500 ease-out",
+                        "flex justify-center transition-[opacity,transform] duration-500 ease-out",
                         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3",
                     ].join(" ")}
                 >
@@ -55,6 +55,7 @@ export default function SplashPage() {
                         type="button"
                         onClick={() => router.push("/home")}
                         className="btn-primary"
+                        style={{ width: "12rem", height: "3.125rem" }}
                     >
                         START TRAINING
                     </button>
