@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getClasses } from "@/lib/api/classes";
 import ClassCarousel from "@/components/classes/ClassCarousel";
-import StarRating from "@/components/ui/Starrating";
+import StarRating from "@/components/ui/StarRating";
 
 
 export default async function ClassesPage() {

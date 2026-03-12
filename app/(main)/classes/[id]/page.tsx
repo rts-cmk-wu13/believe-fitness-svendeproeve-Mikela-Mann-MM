@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getClassesById } from "@/lib/api/classes"
 import { getSession } from "@/lib/session";
 import RateButton from "@/components/classes/Ratebutton";
-import StarRating from "@/components/ui/Starrating";
+import StarRating from "@/components/ui/StarRating";
 import EnrollButton from "@/components/classes/EnrollButton";
 
 interface Props {
@@ -28,7 +28,7 @@ export default async function ClassesDetailPage({ params }: Props) {
         session &&
         fitnessClass.users?.some((u) => u.id === session.userId) === true;
 
-// Max-deltagere nået?
+    // Max-deltagere nået?
     const isFull =
         fitnessClass.maxParticipants !== undefined &&
         (fitnessClass.users?.length ?? 0) >= fitnessClass.maxParticipants;
@@ -59,7 +59,7 @@ export default async function ClassesDetailPage({ params }: Props) {
                 {/* Title + rating */}
                 <div
                     className="absolute inset-0 flex flex-col justify-end p-5 bg-[linear-gradient(to_top,rgba(80,80,80,0.9)_0%,transparent_50%)]"
-                    >
+                >
                     <h1 className="text-4xl font-black leading-tight mb-3 text-(--brand-yellow)">{fitnessClass.className}
                     </h1>
 
@@ -99,6 +99,10 @@ export default async function ClassesDetailPage({ params }: Props) {
                     aria-label={`Schedule: ${fitnessClass.classDay} at ${fitnessClass.classTime}`}
                 >
                     {fitnessClass.classDay} – {fitnessClass.classTime}
+                </p>
+
+                <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--grey-dark)" }}>
+                    {fitnessClass.classDescription}
                 </p>
 
                 {/* Træner */}

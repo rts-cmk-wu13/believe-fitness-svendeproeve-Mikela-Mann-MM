@@ -37,12 +37,7 @@ export default function EnrollButton({ classId, initialEnrolled }: EnrollButtonP
             <button
                 onClick={handleClick}
                 disabled={loading}
-                className={`
-                    w-[70%] py-4 rounded-xl
-                    bg-(--brand-mid) text-white font-medium text-base
-                    border-none transition-opacity
-                    ${loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}
-                `}
+                className="btn-primary"
             >
                 {loading ? "..." : enrolled ? "LEAVE CLASS" : "SIGN UP"}
             </button>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import StarRating from "@/components/ui/Starrating"
+import StarRating from "@/components/ui/StarRating"
 import type { FitnessClassSummary, Rating } from "@/types";
 
 interface ClassCardProps {
@@ -38,7 +38,7 @@ export default function ClassCard({ fitnessClass, width = 160, height = 200 }: C
                     sizes={`${width}px`}
                 />
             ) : (
-                <div className="w-full h-full bg-var(--grey-light)" />
+                <div className="w-full h-full" style={{ backgroundColor: "var(--grey-light)" }} />
             )}
 
             {/* Label overlay */}
