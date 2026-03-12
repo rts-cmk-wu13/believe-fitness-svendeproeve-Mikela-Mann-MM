@@ -3,9 +3,14 @@
 "use client";
 
 import { useActionState } from "react";
-import { contactAction, initialContactState } from "@/lib/actions";
+import { contactAction } from "@/lib/actions";
 import FormError from "@/components/ui/FormError";
+import type { ContactFormState } from "@/types";
 
+const initialContactState: ContactFormState = {
+  errors: {},
+  success: false,
+};
 
 export default function ContactForm() {
 const [state, formAction, isPending] = useActionState(
@@ -33,8 +38,8 @@ if (state.success) {
           name="name"
           className="form-input" 
           placeholder="Enter your name..." 
-          aria-describedby={state.errors.name ? "name-error" : undefined}
-          aria-invalid={!!state.errors.name}
+           aria-describedby={state.errors.name ? "name-error" : undefined} 
+           aria-invalid={!!state.errors.name} 
           />
           <FormError message={state.errors.name} />
         </div>
@@ -46,8 +51,8 @@ if (state.success) {
           className="form-input" 
           placeholder="Enter your email..."
           type="email" 
-          aria-describedby={state.errors.email ? "email-error" : undefined}
-            aria-invalid={!!state.errors.email}
+          aria-describedby={state.errors.email ? "email-error" : undefined} 
+            aria-invalid={!!state.errors.email} 
           />
           <FormError message={state.errors.email} />
         </div>
@@ -59,8 +64,8 @@ if (state.success) {
             className="form-input resize-none"
             placeholder="Enter your message..."
             rows={4}
-             aria-describedby={state.errors.message ? "message-error" : undefined}
-            aria-invalid={!!state.errors.message}
+              aria-describedby={state.errors.message ? "message-error" : undefined} 
+             aria-invalid={!!state.errors.message} 
           />
           <FormError message={state.errors.message} />
 

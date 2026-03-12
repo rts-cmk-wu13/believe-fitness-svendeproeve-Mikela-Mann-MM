@@ -40,7 +40,7 @@ export default function NewsletterForm() {
       <section className="content-wrapper py-10">
         <h2 className="text-2xl font-bold text-white mb-2">Sign up for our newsletter</h2>
         <p className="text-sm text-green-400 mt-2">
-          ✓ You are now subscribed to our newsletter!
+           You are now subscribed to our newsletter!
         </p>
       </section>
     );

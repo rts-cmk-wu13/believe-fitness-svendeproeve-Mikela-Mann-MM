@@ -18,10 +18,14 @@ import { createRating } from "./api/ratings"
 import { sendMessage } from "./api/message";
 import { reportError } from "./reportError";
 import type {
+  LoginState,
+  RegisterState,
+  CreateClassState,
+  ContactFormState,
   UpdateClassPayload,
   CreateRatingPayload,
   ContactFormErrors,
-} from "@/types";
+} from "@/types/index";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -38,77 +42,6 @@ function requireInstructor(role: string) {
     throw new Error("Unauthorized");
 }
 
-// ─── State-typer til useActionState ────────────────────────────────────────────────────────────────
-
-export interface LoginState {
-  values: { username: string; password: string };
-  errors: { username?: string; password?: string; general?: string };
-}
-
-export interface RegisterState {
-  values: {
-    firstname: string;
-    lastname: string;
-    username: string;
-    password: string;
-    passwordConfirm: string;
-  };
-  errors: {
-    firstname?: string;
-    lastname?: string;
-    username?: string;
-    password?: string;
-    passwordConfirm?: string;
-    general?: string;
-  }
-}
-
-export const initialLoginState: LoginState = {
-  values: { username: "", password: "" },
-  errors: {},
-};
-
-export const initialRegisterState: RegisterState = {
-  values: {
-    firstname: "",
-    lastname: "",
-    username: "",
-    password: "",
-    passwordConfirm: "",
-  },
-  errors: {},
-};
-
-// ─── State-typer til useActionState ──────────────────────────────────────────
-
-export interface CreateClassState {
-  values: {
-    className: string;
-    classDescription: string;
-    classDay: string;
-    classTime: string;
-    maxParticipants: number;
-    trainerId: number;
-    assetId: number;
-  };
-  errors: {
-    className?: string;
-    general?: string;
-  };
-}
-
-export const initialCreateClassState: CreateClassState = {
-  values: {
-    className: "",
-    classDescription: "",
-    classDay: "Monday",
-    classTime: "09:00",
-    maxParticipants: 12,
-    trainerId: 0,
-    assetId: 1,
-  },
-  errors: {},
-};
 
 // ─── Validering ───────────────────────────────────────────────────────────────
 
@@ -353,16 +286,6 @@ export async function updateClassActionState(
 
 // ─── Contact ────────────────────────────────────────────────────────────────
 
-export interface ContactFormState {
-  errors: ContactFormErrors;
-  success: boolean;
-}
-
-
-export const initialContactState: ContactFormState = {
-  errors: {},
-  success: false,
-};
 
 export async function contactAction(
   _prevState: ContactFormState,

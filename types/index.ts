@@ -162,6 +162,86 @@ export type ContactFormErrors = {
   general?: string;
 }
 
+// ─── Action States (useActionState) ───────────────────────────────────────
+
+export interface LoginState {
+  values: { username: string; password: string };
+  errors: { username?: string; password?: string; general?: string };
+}
+ 
+export const initialLoginState: LoginState = {
+  values: { username: "", password: "" },
+  errors: {},
+};
+ 
+export interface RegisterState {
+  values: {
+    firstname: string;
+    lastname: string;
+    username: string;
+    password: string;
+    passwordConfirm: string;
+  };
+  errors: {
+    firstname?: string;
+    lastname?: string;
+    username?: string;
+    password?: string;
+    passwordConfirm?: string;
+    general?: string;
+  };
+}
+ 
+export const initialRegisterState: RegisterState = {
+  values: {
+    firstname: "",
+    lastname: "",
+    username: "",
+    password: "",
+    passwordConfirm: "",
+  },
+  errors: {},
+};
+ 
+export interface CreateClassState {
+  values: {
+    className: string;
+    classDescription: string;
+    classDay: string;
+    classTime: string;
+    maxParticipants: number;
+    trainerId: number;
+    assetId: number;
+  };
+  errors: {
+    className?: string;
+    general?: string;
+  };
+}
+ 
+export const initialCreateClassState: CreateClassState = {
+  values: {
+    className: "",
+    classDescription: "",
+    classDay: "Monday",
+    classTime: "09:00",
+    maxParticipants: 12,
+    trainerId: 0,
+    assetId: 1,
+  },
+  errors: {},
+};
+ 
+export interface ContactFormState {
+  errors: ContactFormErrors;
+  success: boolean;
+}
+ 
+export const initialContactState: ContactFormState = {
+  errors: {},
+  success: false,
+};
+
 // ─── Component Props ───────────────────────────────────────────────────────
 
 export interface SearchBarProps {
