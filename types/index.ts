@@ -90,7 +90,7 @@ export interface Rating {
 
 // ─── Auth Types ────────────────────────────────────────────────────────────
 
-export interface LoginPayload {
+export type LoginPayload = {
   username: string;
   password: string;
   rememberMe?: boolean;
@@ -114,7 +114,7 @@ export interface Session {
   rememberMe?: boolean;
 }
 
-export interface AuthErrors {
+export type AuthErrors = {
   username?: string;
   password?: string;
   general?: string;
@@ -122,29 +122,29 @@ export interface AuthErrors {
 
 // ─── Form Types ────────────────────────────────────────────────────────────
 
-export interface ContactPayload {
+export type ContactPayload = {
   name: string;
   email: string;
   message: string;
 }
 
-export interface NewsletterPayload {
+export type NewsletterPayload = {
   email: string;
 }
 
-export interface RegisterPayload {
+export type RegisterPayload = {
   username: string;
   password: string;
   userFirstName: string;
   userLastName: string;
 }
 
-export interface CreateRatingPayload {
+export type CreateRatingPayload = {
   userId: number;
   rating: number;
 } 
 
-export interface UpdateClassPayload {
+export type UpdateClassPayload = {
   id: number;
   className: string;
   classDescription: string;
@@ -155,7 +155,7 @@ export interface UpdateClassPayload {
   assetId: number;
 }
 
-export interface ContactFormErrors {
+export type ContactFormErrors = {
   name?: string;
   email?: string;
   message?: string;
@@ -184,3 +184,5 @@ export interface EnrollClassButtonProps {
   onEnroll: (classId: number) => Promise<{ error?: string; success?: boolean }>;
   onLeave: (classId: number) => Promise<{ error?: string; success?: boolean }>;
 }
+
+// type - til simple shapes, unions, og utility-typer vs interface - til ting der beskriver en "kontrakt" (form states, API responses, klasser)

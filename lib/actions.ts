@@ -2,8 +2,8 @@
 
 "use server";
 
-import { redirect } from "next/navigation"; 
-import { revalidatePath } from "next/cache"; 
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { getSession, setSession, clearSession } from "./session";
 import { loginUser, getUser } from "./api/auth";
 import { registerUser } from "./api/users";
@@ -15,10 +15,12 @@ import {
   updateClass,
 } from "@/lib/api/classes";
 import { createRating } from "./api/ratings"
+import { sendMessage } from "./api/message";
 import { reportError } from "./reportError";
 import type {
   UpdateClassPayload,
   CreateRatingPayload,
+  ContactFormErrors,
 } from "@/types";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -140,7 +142,7 @@ function validateClass(
   return e;
 }
 
-function parseClassFormData(formData: FormData): CreateClassState ["values"] {
+function parseClassFormData(formData: FormData): CreateClassState["values"] {
   return {
     className: (formData.get("className") as string) ?? "",
     classDescription: (formData.get("classDescription") as string) ?? "",
@@ -163,13 +165,13 @@ export async function loginAction(
     password: (formData.get("password") as string) ?? "",
   };
 
-   if (!values.username.trim())
+  if (!values.username.trim())
     return { values, errors: { username: "Username is required" } };
   if (!values.password)
     return { values, errors: { password: "Password is required" } };
 
 
- try {
+  try {
     const res = await loginUser({ username: values.username, password: values.password });
     const user = await getUser(res.userId, res.token);
     await setSession({
@@ -217,7 +219,7 @@ export async function registerAction(
       password: values.password,
     });
   } catch (err) {
-    reportError(err, values.username );
+    reportError(err, values.username);
     return {
       values,
       errors: { general: "Could not create account. Username may already be taken." },
@@ -229,7 +231,7 @@ export async function registerAction(
 
 // ─── Classes ────────────────────────────────────────────────────────────────
 
-export async function enrollAction(classId: number): Promise<ActionResult>{
+export async function enrollAction(classId: number): Promise<ActionResult> {
   try {
     const session = await requireSession();
     await enrollInClass(classId, session.userId, session.token);
@@ -242,7 +244,7 @@ export async function enrollAction(classId: number): Promise<ActionResult>{
   }
 }
 
-export async function leaveAction(classId: number): Promise<ActionResult>  {
+export async function leaveAction(classId: number): Promise<ActionResult> {
   try {
     const session = await requireSession();
     await leaveClass(classId, session.userId, session.token);
@@ -347,4 +349,46 @@ export async function updateClassActionState(
   }
 
   redirect("/profile");
+}
+
+// ─── Contact ────────────────────────────────────────────────────────────────
+
+export interface ContactFormState {
+  errors: ContactFormErrors;
+  success: boolean;
+}
+
+
+export const initialContactState: ContactFormState = {
+  errors: {},
+  success: false,
+};
+
+export async function contactAction(
+  _prevState: ContactFormState,
+  formData: FormData
+): Promise<ContactFormState> {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const message = formData.get("message") as string;
+
+  const errors: ContactFormErrors = {};
+  if (!name.trim()) errors.name = "Name is required";
+  if (!email.trim()) errors.email = "Email is required";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    errors.email = "Invalid e-mail";
+  if (!message.trim()) errors.message = "Message is required";
+
+  if (Object.keys(errors).length) return { errors, success: false };
+
+  try {
+    await sendMessage({ name, email, message });
+    return { errors: {}, success: true };
+  } catch (err) {
+    reportError(err, "contactAction");
+    return {
+      errors: { general: "Something went wrong. Please try again" },
+      success: false,
+    };
+  }
 }
