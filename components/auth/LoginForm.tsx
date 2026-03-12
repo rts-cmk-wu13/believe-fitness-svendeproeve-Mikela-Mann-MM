@@ -4,18 +4,15 @@
 
 import { useActionState } from "react";
 import { loginAction } from "@/lib/actions";
-import type { LoginState } from "@/lib/actions";
+import { initialLoginState } from "@/types";
+import type { LoginState } from "@/types";
 import FormError from "@/components/ui/FormError";
 
-const initialState: LoginState = {
-    values: { username: "", password: "" },
-    errors: {},
-};
 
 export default function LoginForm() {
     const [state, formAction, isPending] = useActionState<LoginState, FormData>(
     loginAction,
-    initialState
+    initialLoginState
 );
 
     return (

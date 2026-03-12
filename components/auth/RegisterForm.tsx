@@ -3,10 +3,10 @@
 "use client";
 
 import { useActionState } from "react";
-import { registerAction, initialRegisterState, RegisterState } from "@/lib/actions";
+import { registerAction } from "@/lib/actions";
+import { RegisterState } from "@/types";
+import { initialRegisterState } from "@/types";
 import FormError from "@/components/ui/FormError";
-
-
 
 
 export default function RegisterForm() {

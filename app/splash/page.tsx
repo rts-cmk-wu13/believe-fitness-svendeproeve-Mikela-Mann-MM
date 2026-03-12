@@ -5,20 +5,17 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const BG_IMAGES = [
-    "/splash1.jpg",
-    /* "/splash2.jpg", */
-];
+const BG_IMAGES = ["images/splash1.png", "images/splash2.png"];
 
 export default function SplashPage() {
     const [visible, setVisible] = useState<boolean>(false);
-    const [bg] = useState<string>(
-        () => BG_IMAGES[Math.floor(Math.random() * BG_IMAGES.length)]
-    );
+    const [bg, setBg] = useState<string>(BG_IMAGES[0]);
 
     const router = useRouter();
 
     useEffect(() => {
+        setBg(BG_IMAGES[Math.floor(Math.random() * BG_IMAGES.length)]);
+        
         const timer = setTimeout(() =>
             setVisible(true), 700);
         return () => clearTimeout(timer);

@@ -1,89 +1,61 @@
-/* 
+
 
 import { redirect } from "next/navigation";
+import { getSession } from "@/lib/session";
+import { getUserById } from "@/lib/api/users";
+import MemberClassList from "@/components/profile/MemberClassList";
+import InstructorClassList from "@/components/profile/InstructorClassList";
 import { User } from "lucide-react";
-import { getUser, getActivities } from "@/lib/api";
-import { getSession } from "@/lib/dal";
-import LogoutButton from "@/components/ui/LogoutButton";
-/* import InstructorActivityList from "@/components/activities/InstructorActivityList"; 
-import Link from "next/link";
 
 export default async function ProfilePage() {
   const session = await getSession();
-  if (!session) redirect("/login");
+if (!session) redirect("/login");
 
-  const isInstructor = session.role === "instructor" || session.role === "admin";
+const user = await getUserById(session.userId).catch(() => null);
+if (!user) redirect("/login");
 
-  const [user, allActivities] = await Promise.all([
-    getUser(session.userId, session.token),
-    isInstructor ? getActivities() : Promise.resolve([]),
-  ]);
+const isInstructor = session.role === "instructor" || session.role === "admin";
 
-  const instructorActivities = allActivities.filter(
-    (a) => a.instructorId === session.userId
-  );
-
-  return (
-    <main>
-      <div className="bg-(--brand-dark) px-4 py-5 flex justify-between items-center">
-        <h1 className="text-white font-bold text-lg">Min profil</h1>
-        <LogoutButton />
+return (
+  <main className="page-content content-wrapper pt-6"
+aria-label="Profile page"
+  >
+  {/* Profile header */ }
+  <section>
+    <div className="flex items-center gap-4 mb-8">
+      <div
+        className="size-14 rounded-full flex items-center justify-center shrink-0 bg-(--brand-yellow)"
+        aria-hidden="true"
+      >
+        <User size={28} color="#0A0A0A" strokeWidth={2} />
       </div>
-
-      <div className="bg-(--grey-light) px-4 py-8 text-center">
-        <div className="w-14 h-14 rounded-full bg-(--brand-dark) flex items-center justify-center mx-auto mb-3">
-          <User size={28} className="text-(--grey-mid)" />
-        </div>
-        <p className="text-(--brand-dark) font-bold text-xl">
-          {user.firstname} {user.lastname}
+      <div>
+        <p className="font-bold text-lg" >
+          {fullName}
         </p>
-        <p className="text-(--grey-mid) text-sm mt-1">
-          {isInstructor ? "Instruktør" : "Medlem"}
+        <p
+          className="text-sm capitalize text-(--grey-dark)"
+          aria-label={`Role: ${roleLabel}`}
+        >
+          {roleLabel}
         </p>
       </div>
+    </div>
+      </section >
 
-      <div className="bg-(--brand-dark) px-4 py-6 min-h-screen">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-white font-bold">
-            {isInstructor ? "Mine hold" : "Tilmeldte hold"}
-          </h2>
-          {isInstructor && (
-            <Link
-              href="/aktiviteter/opret"
-              className="w-10 h-10 bg-(--grey-light) rounded-xl flex items-center justify-center font-bold text-(--brand-dark) text-xl"
-            >
-              +
-            </Link>
-          )}
-        </div>
-
-        {/* {isInstructor ? (
-          <InstructorActivityList activities={instructorActivities} />
-        ) : (user.activities ?? []).length === 0 ? (
-          <p className="text-(--grey-mid) text-sm">
-            Du er ikke tilmeldt nogen aktiviteter endnu.
-          </p>
+  {/* Class list*/ }
+  < section aria - label={ isInstructor ? "Classes you instruct" : "Classes you are enrolled in" }>
+    {
+      isInstructor?(
+          <InstructorClassList classes = {(user as any).classes ?? []} />
         ) : (
-          <ul className="flex flex-col gap-3">
-            {(user.activities ?? []).map((a) => (
-              <li key={a.id} className="bg-(--grey-light) rounded-xl p-4">
-                <p className="text-(--brand-dark) font-bold text-base">{a.name}</p>
-                <p className="text-(--brand-dark) text-sm mt-1">
-                  {a.weekday} kl. {a.time}
-                </p>
-                <div className="mt-3">
-                  <Link
-                    href={`/aktiviteter/${a.id}`}
-                    className="px-4 py-2 bg-(--brand-dark) text-white text-sm rounded-lg inline-block"
-                  >
-                    Vis hold
-                  </Link>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )} }
-      </div>
-    </main>
-  );
-} */
+  <MemberClassList classes={(user as any).enrolledClasses ?? []} />
+)}
+      </section >
+
+</main >
+
+
+);
+
+}

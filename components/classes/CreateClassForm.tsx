@@ -8,11 +8,13 @@ import { useActionState } from "react";
 import {
   createClassAction,
   updateClassActionState,
-  initialCreateClassState,
-  type CreateClassState,
 } from "@/lib/actions";
 import FormError from "@/components/ui/FormError";
-import type { TrainerSummary, FitnessClass } from "@/types"; 
+import {
+  initialCreateClassState, CreateClassState
+} from "@/types";
+import type { TrainerSummary, FitnessClass,  } from "@/types"; 
+
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
