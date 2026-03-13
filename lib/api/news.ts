@@ -1,4 +1,5 @@
 
+
 import type { NewsItem } from "@/types";
 import { apiFetch } from "./client";
 

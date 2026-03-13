@@ -43,6 +43,7 @@ export interface FitnessClassSummary {
   assetId: number;
   trainer?: { trainerName: string };
   asset?: { url: string };
+  users?: { id: number }[];
 }
 
 export interface FitnessClass extends FitnessClassSummary {

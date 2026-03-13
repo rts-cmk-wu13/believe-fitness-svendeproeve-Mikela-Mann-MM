@@ -13,11 +13,11 @@ const initialContactState: ContactFormState = {
 };
 
 export default function ContactForm() {
-const [state, formAction, isPending] = useActionState(
-  contactAction, 
-  initialContactState)
-  
-if (state.success) {
+  const [state, formAction, isPending] = useActionState(
+    contactAction,
+    initialContactState)
+
+  if (state.success) {
     return (
       <section className="content-wrapper--narrow py-10">
         <h2 className="text-2xl font-bold text-white mb-2">Contact us</h2>
@@ -33,44 +33,44 @@ if (state.success) {
       <form action={formAction} noValidate className="flex flex-col gap-2">
 
         <div>
-          <input 
-          id="name"
-          name="name"
-          className="form-input" 
-          placeholder="Enter your name..." 
-           aria-describedby={state.errors.name ? "name-error" : undefined} 
-           aria-invalid={!!state.errors.name} 
+          <input
+            id="name"
+            name="name"
+            className="form-input"
+            placeholder="Enter your name..."
+            aria-describedby={state.errors.name ? "name-error" : undefined}
+            aria-invalid={!!state.errors.name}
           />
           <FormError message={state.errors.name} />
         </div>
 
         <div>
-          <input 
-          id="email"
+          <input
+            id="email"
             name="email"
-          className="form-input" 
-          placeholder="Enter your email..."
-          type="email" 
-          aria-describedby={state.errors.email ? "email-error" : undefined} 
-            aria-invalid={!!state.errors.email} 
+            className="form-input"
+            placeholder="Enter your email..."
+            type="email"
+            aria-describedby={state.errors.email ? "email-error" : undefined}
+            aria-invalid={!!state.errors.email}
           />
           <FormError message={state.errors.email} />
         </div>
 
         <div>
           <textarea
-          id="message"
+            id="message"
             name="message"
             className="form-input resize-none"
             placeholder="Enter your message..."
             rows={4}
-              aria-describedby={state.errors.message ? "message-error" : undefined} 
-             aria-invalid={!!state.errors.message} 
+            aria-describedby={state.errors.message ? "message-error" : undefined}
+            aria-invalid={!!state.errors.message}
           />
           <FormError message={state.errors.message} />
 
         </div>
-        <FormError message={state.errors.general} aria-live="polite"/>
+        <FormError message={state.errors.general} aria-live="polite" />
         <div className="flex justify-center mt-2">
           <button
             type="submit"

@@ -15,11 +15,11 @@ function getAvgRating(ratings?: { rating: number }[]): number {
 export default async function ClassesPage() {
     const classes = await getClasses().catch(() => []);
 
- // Fetch ratings for alle klasser parallelt - ved mange klasser 100+ vil det overbelaste api'et
+    // Fetch ratings for alle klasser parallelt - ved mange klasser 100+ vil det overbelaste api'et
     const ratingsPerClass = await Promise.all(
         classes.map((c) => getRatings(c.id).catch(() => []))
     );
- 
+
     const classesWithRatings = classes.map((c, i) => ({
         ...c,
         ratings: ratingsPerClass[i],
@@ -35,16 +35,14 @@ export default async function ClassesPage() {
     const featuredRating = getAvgRating(featured?.ratings);
 
     return (
-        <main className="page-content" aria-label="Classes page">
-            <div className="content-wrapper pt-4">
-                <h1 className="text-2xl font-bold mb-6">Popular classes</h1>
-            </div>
+        <main className="page-content content-wrapper" aria-label="Classes page">
+           
 
             {featured && (
                 <>
                     <Link
                         href={`/classes/${featured.id}`}
-                        className="block relative mx-6 mb-8 rounded-2xl overflow-hidden h-80"
+                        className="block relative mx-6 mb-8 rounded-2xl overflow-hidden h-[50dvh]"
                         aria-label={`View featured class: ${featured.className}`}
                     >
                         {(featured as any).asset?.url ? (
@@ -69,10 +67,10 @@ export default async function ClassesPage() {
 
                     {rest.length > 0 && (
                         <section aria-label="Classes recommended for you">
-                            <div className="content-wrapper mb-3">
-                                <h2 className="text-xl font-bold">Classes for You</h2>
+                            <div>
+                                <h2 className="text-lg font-bold pt-8 pb-3">Classes for You</h2>
                             </div>
-                            <div className="pl-6">
+                            <div>
                                 <ClassCarousel classes={rest as any} />
                             </div>
                         </section>

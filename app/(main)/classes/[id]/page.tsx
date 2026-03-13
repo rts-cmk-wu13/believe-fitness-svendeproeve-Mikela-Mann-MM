@@ -37,7 +37,7 @@ export default async function ClassesDetailPage({ params }: Props) {
         <main className="page-content" id="main-content">
             {/* Hero */}
 
-            <div className="relative h-[55vw] max-h-88"
+            <div className="relative h-[50dvh] max-h-88 -mt-nav"
                 aria-label={`Hero image for ${fitnessClass.className}`}
             >
                 {fitnessClass.asset?.url ? (
@@ -55,6 +55,9 @@ export default async function ClassesDetailPage({ params }: Props) {
                         aria-label="No label available"
                     />
                 )}
+
+                {/* Mørkt overlay */}
+                <div className="absolute inset-0 bg-black/40" />
 
                 {/* Title + rating */}
                 <div
@@ -95,23 +98,23 @@ export default async function ClassesDetailPage({ params }: Props) {
 
             <div className="content-wrapper pt-6">
                 <p
-                    className="font-medium mb-4"
+                    className="font-medium mb-4 pb-2"
                     aria-label={`Schedule: ${fitnessClass.classDay} at ${fitnessClass.classTime}`}
                 >
                     {fitnessClass.classDay} – {fitnessClass.classTime}
                 </p>
 
-                <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--grey-dark)" }}>
+                <p className="text-sm leading-relaxed mb-8 text-(--grey-dark) pb-3">
                     {fitnessClass.classDescription}
                 </p>
 
                 {/* Træner */}
                 {fitnessClass.trainer && (
                     <section className="mb-10" aria-labelledby="trainer-heading">
-                        <h2 id="trainer-heading" className="text-xl font-bold mb-4">
+                        <h2 id="trainer-heading" className="text-lg font-bold mb-4 pb-30">
                             Trainer
                         </h2>
-                        <p className="text-center font-bold" aria-label={`Trainer: ${fitnessClass.trainer.trainerName}`}>
+                        <p className="text-center font-bold pb-8" aria-label={`Trainer: ${fitnessClass.trainer.trainerName}`}>
                             {fitnessClass.trainer.trainerName}
                         </p>
                     </section>

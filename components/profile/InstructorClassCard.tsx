@@ -49,12 +49,12 @@ export default function InstructorClassCard({ fitnessClass }: Props) {
 
   return (
     <li className="profile-card">
-          <p className="text-xl font-bold mb-1">{fitnessClass.className}</p>
-          <p className="text-sm mb-2 text-(--grey-dark)">
+          <p className="text-lg font-bold mb-1 pb-2">{fitnessClass.className}</p>
+          <p className="text-sm mb-2 pb-1 text-(--grey-dark)">
             {fitnessClass.classDay} {fitnessClass.classTime}
           </p>
 
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between mb-4 pb-2">
             <p className="text-sm">
               Max participants: {" "} 
               <span className="font-medium">{fitnessClass.maxParticipants}</span>
@@ -65,10 +65,10 @@ export default function InstructorClassCard({ fitnessClass }: Props) {
             </p>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
             <Link
               href={`/profile/${fitnessClass.id}/participants`}
-              className="btn-primary shrink-0 w-auto px-5"
+              className="btn-primary flex-1 text-center"
             >
               PARTICIPANTS
             </Link>

@@ -1,4 +1,5 @@
 
+
 import Link from "next/link";
 import { getSession } from "@/lib/session";
 
@@ -6,7 +7,7 @@ export default async function Hero() {
     const session = await getSession();
 
     return (
-        <section className="relative content-wrapper min-h-[280px] pt-24 pb-10 bg-[url('/images/welcome-center.jpg')] bg-cover bg-center bg-no-repeat">
+        <section className="relative content-wrapper min-h-70 pt-24 pb-10 bg-[url('/images/welcome-center.jpg')] bg-cover bg-center bg-no-repeat">
             <div className="absolute inset-0 bg-black/50" />
             <div className="relative z-10">
             <h1 className="text-4xl font-black leading-tight mb-1 text-(--brand-yellow)">

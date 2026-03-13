@@ -17,17 +17,17 @@ if (!user) redirect("/login");
 const isInstructor = session.role === "instructor" || session.role === "admin";
 
 return (
-  <main className="page-content content-wrapper pt-6"
+  <main className="page-content page-content content-wrapper overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]content-wrapper pt-8"
 aria-label="Profile page"
   >
   {/* Profile header */ }
   <section>
-    <div className="flex items-center gap-4 mb-8">
+    <div className="flex items-center gap-4 mb-8 pb-8">
       <div
         className="size-14 rounded-full flex items-center justify-center shrink-0 bg-(--brand-yellow)"
         aria-hidden="true"
       >
-        <User size={28} color="#0A0A0A" strokeWidth={2} />
+        <User size={28} color="#0A0A0A" fill="#0A0A0A" strokeWidth={2} />
       </div>
       <div>
         <p className="font-bold text-lg" >
@@ -44,9 +44,9 @@ aria-label="Profile page"
   <section>
     {
       isInstructor?(
-          <InstructorClassList classes = {(user as any).classes ?? []} />
+          <InstructorClassList classes = {user.classes ?? []} />
         ) : (
-  <MemberClassList classes={(user as any).classes ?? []} />
+  <MemberClassList classes={user.classes ?? []} />
 )}
       </section >
 

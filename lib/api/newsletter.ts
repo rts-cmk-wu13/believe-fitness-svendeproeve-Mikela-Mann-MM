@@ -1,4 +1,5 @@
 
+
 import type { NewsletterPayload } from "@/types";
 import { apiFetch } from "./client";
 

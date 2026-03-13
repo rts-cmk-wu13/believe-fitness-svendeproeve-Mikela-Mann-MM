@@ -12,6 +12,7 @@ export default function InstructorClassList({ classes }: Props) {
   
     return (
         <div>
+            <div className="flex flex-col gap-6">
             <ul className="flex flex-col gap-4 mb-6">
                 {classes.map((c) => (
             <InstructorClassCard key={c.id} fitnessClass={c} />
@@ -21,6 +22,7 @@ export default function InstructorClassList({ classes }: Props) {
             <Link href="/create-class" className="btn-primary">
                 ADD CLASS
             </Link>
+        </div>
         </div>
     );
   }

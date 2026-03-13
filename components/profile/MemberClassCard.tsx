@@ -41,12 +41,12 @@ export default function MemberClassCard({ fitnessClass }: Props) {
 
   return (
     <li className="profile-card">
-          <p className="text-xl font-bold mb-1">{fitnessClass.className}</p>
-          <p className="text-sm mb-2 text-(--grey-dark)">
+          <p className="text-lg font-bold mb-1">{fitnessClass.className}</p>
+          <p className="text-sm mb-2 text-(--grey-dark) pt-4">
             {fitnessClass.classDay} {fitnessClass.classTime}
           </p>
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 pt-4">
             <Link
               href={`/classes/${fitnessClass.id}`}
               className="btn-primary flex-1 text-center"
@@ -60,7 +60,7 @@ export default function MemberClassCard({ fitnessClass }: Props) {
               className="btn-primary flex-1 disabled:opacity-50"
               aria-label="Leave class"
             >
-              {loading ? "LEAVING..." : "LEAVE CLASS"}
+              {loading ? "LEAVING..." : "LEAVE"}
             </button>
           </div>
 

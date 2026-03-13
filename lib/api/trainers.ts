@@ -1,4 +1,5 @@
 
+
 import type { Trainer, TrainerSummary } from "@/types";
 import { apiFetch } from "./client";    
 

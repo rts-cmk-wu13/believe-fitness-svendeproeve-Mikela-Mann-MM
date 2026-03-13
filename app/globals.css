@@ -6,6 +6,7 @@
 /* ─── Design tokens───────────────────────────────────────────────────────── */
 
 @theme {
+  
   /* Brand */
   --brand-yellow: #F1C40E;
   --brand-yellow-dark: #F1C40E;
@@ -42,10 +43,20 @@
 
 }
 
+
 /* ─── Reset ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 body {
@@ -63,13 +74,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── App shell ───────────────────────────────────────────────────────────── */
 #app-shell {
-  max-width: 25.6875rem; /* 411px */
-  height: 100dvh;
-  margin: 0 auto;
+  max-width: 30rem; /* 480px */
   min-height: 100dvh;
+  margin: 0 auto;
   position: relative;
-  overflow-x: hidden;
   background-color: var(--white);
+  overflow-x:clip;
+  
 }
 
 .page-content {
@@ -242,16 +253,17 @@ textarea.form-input {
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%);
   width: 100%;
-  max-width: 25.6875rem;
+  max-width: 30rem;
   height: 100dvh;
   background-color: var(--white);
   z-index: 100;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 10rem;
   gap: 2.5rem;
 }
 

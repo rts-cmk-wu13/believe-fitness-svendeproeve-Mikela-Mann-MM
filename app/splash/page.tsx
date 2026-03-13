@@ -54,8 +54,8 @@ export default function SplashPage() {
                     <button
                         type="button"
                         onClick={() => router.push("/home")}
-                        className="btn-primary"
-                        style={{ width: "12rem", height: "3.125rem" }}
+                        className="btn-primary btn-primary--sm shadow-[0_8px_20px_rgba(0,0,0,0.4)]"
+                       
                     >
                         START TRAINING
                     </button>

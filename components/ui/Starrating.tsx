@@ -3,8 +3,8 @@
 import { Star } from "lucide-react";
 
 interface StarRatingProps {
-  rating: number; // Expected to be between 0 and 5
-  max?: number; // Optional, default to 5
+  rating: number; 
+  max?: number; 
   size?: "sm" | "md";
 }
 
@@ -16,8 +16,8 @@ export default function StarRating({ rating, max = 5, size = "md" }: StarRatingP
       role="img"
       arial-label={`${rating} out of ${max} stars`}>
       {Array.from({ length: max }, (_, i) => (
-        <Star key={i} size={sizePX} fill={i < Math.round(rating) ? "var(--brand-yellow)" : "#D1D5DB"}
-          stroke={i < Math.round(rating) ? "var(--brand-yellow)" : "#D1D5DB"} />
+        <Star key={i} size={sizePX} fill={i < Math.round(rating) ? "#0A0A0A" : "#D1D5DB"}
+          stroke={i < Math.round(rating) ? "#0A0A0A" : "#D1D5DB"} />
 
       ))}
     </div>

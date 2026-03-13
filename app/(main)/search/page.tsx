@@ -12,7 +12,7 @@ export default async function SearchPage(){
     ])
 
     return (
-        <main>
+        <main className="content-wrapper">
             <SearchContent classes={classes as any} trainers={trainers} />
         </main>
     );
