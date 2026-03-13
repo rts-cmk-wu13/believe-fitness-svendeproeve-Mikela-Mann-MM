@@ -28,6 +28,7 @@ export default async function HomePage() {
             <div className="flex justify-center py-2">
                 <div className="h-0.75 w-12 bg-(--grey-mid) rounded-full" />
             </div>
+            
             <Footer />
         </main>
     );

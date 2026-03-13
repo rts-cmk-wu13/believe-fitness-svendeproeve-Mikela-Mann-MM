@@ -43,13 +43,23 @@ export interface FitnessClassSummary {
   assetId: number;
   trainer?: { trainerName: string };
   asset?: { url: string };
-  users?: { id: number }[];
+  users?: {
+    id: number;
+    userFirstName?: string;
+    userLastName?: string;
+    username?: string;
+  }[];
 }
 
 export interface FitnessClass extends FitnessClassSummary {
   trainer?: TrainerSummary;
   asset?: Asset;
-  users?: User[];
+  users?: {
+    id: number;
+    userFirstName?: string;
+    userLastName?: string;
+    username?: string;
+  }[];
   ratings?: Rating[];
 }
 
@@ -146,7 +156,7 @@ export type RegisterPayload = {
 export type CreateRatingPayload = {
   userId: number;
   rating: number;
-} 
+}
 
 export type UpdateClassPayload = {
   id: number;
@@ -172,12 +182,12 @@ export interface LoginState {
   values: { username: string; password: string };
   errors: { username?: string; password?: string; general?: string };
 }
- 
+
 export const initialLoginState: LoginState = {
   values: { username: "", password: "" },
   errors: {},
 };
- 
+
 export interface RegisterState {
   values: {
     firstname: string;
@@ -195,7 +205,7 @@ export interface RegisterState {
     general?: string;
   };
 }
- 
+
 export const initialRegisterState: RegisterState = {
   values: {
     firstname: "",
@@ -206,7 +216,7 @@ export const initialRegisterState: RegisterState = {
   },
   errors: {},
 };
- 
+
 export interface CreateClassState {
   values: {
     className: string;
@@ -222,7 +232,7 @@ export interface CreateClassState {
     general?: string;
   };
 }
- 
+
 export const initialCreateClassState: CreateClassState = {
   values: {
     className: "",
@@ -235,12 +245,12 @@ export const initialCreateClassState: CreateClassState = {
   },
   errors: {},
 };
- 
+
 export interface ContactFormState {
   errors: ContactFormErrors;
   success: boolean;
 }
- 
+
 export const initialContactState: ContactFormState = {
   errors: {},
   success: false,

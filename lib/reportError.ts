@@ -1,9 +1,7 @@
 
 
-export function reportError(error: unknown, context?: string) {
-  console.error("Application error:", context, error);
-}
-/* import * as Sentry from "@sentry/nextjs"; 
+
+import * as Sentry from "@sentry/nextjs"; 
 import { ApiError, NetworkError } from "./errors";
 
 type Context = Record<string, unknown>;
@@ -11,10 +9,11 @@ type Context = Record<string, unknown>;
 /**
  * Centraliseret fejlrapportering.
  * - Development: console med farvet output og kontekst
- * - Production: Sentry med struktureret kontekst
+ * - Production: Sentry med struktureret kontekst */
  
-export function reportError(error: unknown, context?: Context): void {
-  const enriched = buildContext(error, context);
+export function reportError(error: unknown, context?: string | Context): void {
+  const ctx = typeof context === "string" ? { component: context } : context;
+  const enriched = buildContext(error, ctx);
 
   if (process.env.NODE_ENV !== "production") {
     console.error(`\x1b[31m[ERROR] ${enriched.name}: ${enriched.message}\x1b[0m`, enriched);
@@ -52,4 +51,4 @@ function buildContext(error: unknown, extra?: Context): Record<string, unknown> 
   }
 
   return base;
-} */
+} 

@@ -40,7 +40,7 @@ export default function ClassCarousel({ classes }: ClassCarouselProps) {
         <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide pr-6"
+            className="flex overflow-x-auto pb-2 snap-x snap-proximity scrollbar-hide pr-6"
         >
             {repeated.map((c, i) => (
                 <div key={`${Math.floor(i / classes.length)}-${c.id}`} className="snap-start shrink-0 w-40 sm:w-48">

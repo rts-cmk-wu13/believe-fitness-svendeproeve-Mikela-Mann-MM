@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import InstructorClassCard from "./InstructorClassCard";
-import type { FitnessClassSummary } from "@/types";
+import type { FitnessClass, FitnessClassSummary } from "@/types";
 
 interface Props {
-  classes: (FitnessClassSummary & { users?: { id: number }[] })[];
+  classes: FitnessClassSummary [];
 }
 
 export default function InstructorClassList({ classes }: Props) {

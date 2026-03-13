@@ -39,7 +39,11 @@ export async function apiFetch<T>(
     }
 
     if (!res.ok) {
-        throw new ApiError(res.status, typeof responseBody === "string" ? responseBody : "Request failed");
+        throw new ApiError(
+            res.status, 
+            path,
+            typeof responseBody === "string" ? responseBody : "Request failed"
+        );
     }
     return responseBody as T;
 }

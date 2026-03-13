@@ -33,8 +33,8 @@ export default async function ParticipantsPage({ params }: Props) {
           <User size={28} color="#0A0A0A" fill="#0A0A0A" aria-hidden="true" />
         </div>
         <div>
-          <p className="font-bold text-lg">Instructor</p>
-          <p className="text-sm text-(--grey-dark)">Instructor</p>
+          <p className="font-bold text-lg">{fitnessClass.trainer?.trainerName ?? "Instructor"}</p>
+          <p className="text-sm text-(--grey-dark)">{fitnessClass.className}</p>
         </div>
       </div>
 

@@ -8,10 +8,10 @@ import Link from "next/link";
 import { Pencil, Trash2 } from "lucide-react";
 import { deleteClassAction } from "@/lib/actions"
 import { reportError } from "@/lib/reportError"; 
-import type { FitnessClassSummary } from "@/types";
+import type { FitnessClass, FitnessClassSummary } from "@/types";
 
 interface Props {
-  fitnessClass: FitnessClassSummary & { users?: { id: number }[] };
+fitnessClass: FitnessClassSummary 
 }
 
 export default function InstructorClassCard({ fitnessClass }: Props) {
@@ -19,6 +19,8 @@ export default function InstructorClassCard({ fitnessClass }: Props) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState("");
+
+  console.log("card users:", fitnessClass.users);
 
   const handleDelete = async () => {
     if (!confirmDelete) {
@@ -50,6 +52,7 @@ export default function InstructorClassCard({ fitnessClass }: Props) {
   return (
     <li className="profile-card">
           <p className="text-lg font-bold mb-1 pb-2">{fitnessClass.className}</p>
+          
           <p className="text-sm mb-2 pb-1 text-(--grey-dark)">
             {fitnessClass.classDay} {fitnessClass.classTime}
           </p>

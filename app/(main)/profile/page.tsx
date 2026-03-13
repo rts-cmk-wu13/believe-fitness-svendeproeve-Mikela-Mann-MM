@@ -5,7 +5,9 @@ import { getSession } from "@/lib/session";
 import { getUserById } from "@/lib/api/users";
 import MemberClassList from "@/components/profile/MemberClassList";
 import InstructorClassList from "@/components/profile/InstructorClassList";
+import { getClassesById } from "@/lib/api/classes";
 import { User } from "lucide-react";
+import type { FitnessClass } from "@/types";
 
 export default async function ProfilePage() {
   const session = await getSession();
@@ -15,6 +17,16 @@ const user = await getUserById(session.userId, session.token).catch(() => null);
 if (!user) redirect("/login");
 
 const isInstructor = session.role === "instructor" || session.role === "admin";
+
+const classes = isInstructor
+  ? await Promise.all(
+      (user.classes ?? []).map((c) =>
+        getClassesById(String(c.id)).catch(() => c)
+      )
+    ) as FitnessClass[]
+  : user.classes ?? [];
+
+  console.log("classes:", JSON.stringify(classes, null, 2));
 
 return (
   <main className="page-content page-content content-wrapper overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]content-wrapper pt-8"
@@ -44,9 +56,9 @@ aria-label="Profile page"
   <section>
     {
       isInstructor?(
-          <InstructorClassList classes = {user.classes ?? []} />
+          <InstructorClassList classes = {classes} />
         ) : (
-  <MemberClassList classes={user.classes ?? []} />
+  <MemberClassList classes={classes} />
 )}
       </section >
 
