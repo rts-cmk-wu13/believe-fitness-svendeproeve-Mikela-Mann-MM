@@ -24,6 +24,15 @@ function getSession(req: NextRequest) {
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const session = getSession(req);
+
+
+  // Token udløbet — ryd cookie og redirect til login
+  if (session && session.validUntil && session.validUntil < Date.now()) {
+    const res = NextResponse.redirect(new URL("/login", req.url));
+    res.cookies.delete(COOKIE_NAME);
+    return res;
+  }
+
   const isLoggedIn = Boolean(session);
 
   // Redirect loggede brugere væk fra auth-sider → aktiviteter

@@ -33,13 +33,6 @@ export default function RegisterPage() {
   <RegisterForm />
 </div>
 
-{/* Remember me */}
-        <label className="flex items-center justify-center gap-2 mt-5 text-(--grey-mid) text-sm cursor-pointer --font-body pt-3 pb-2">
-          <input type="checkbox" name="rememberMe" />
-          Remember Me
-        </label>
-      
-
 {/* Login link */}
 
         <p className="text-sm text-center mt-8 text-(--grey-mid)">
