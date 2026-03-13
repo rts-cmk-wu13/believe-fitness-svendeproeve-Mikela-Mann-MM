@@ -16,7 +16,7 @@ export default async function MainLayout({
     const session = await getSession();
 
     return (
-        <>
+         <>
         <Header isLoggedIn={!!session} />
         {children}
         </>

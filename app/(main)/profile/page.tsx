@@ -46,7 +46,7 @@ aria-label="Profile page"
       isInstructor?(
           <InstructorClassList classes = {(user as any).classes ?? []} />
         ) : (
-  <MemberClassList classes={(user as any).enrolledClasses ?? []} />
+  <MemberClassList classes={(user as any).classes ?? []} />
 )}
       </section >
 

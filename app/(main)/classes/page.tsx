@@ -4,25 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { getClasses } from "@/lib/api/classes";
 import ClassCarousel from "@/components/classes/ClassCarousel";
+import { getRatings } from "@/lib/api/ratings";
 import StarRating from "@/components/ui/StarRating";
 
+function getAvgRating(ratings?: { rating: number }[]): number {
+    if (!ratings || ratings.length === 0) return 5;
+    return ratings.reduce((s, r) => s + r.rating, 0) / ratings.length;
+}
 
 export default async function ClassesPage() {
     const classes = await getClasses().catch(() => []);
 
+ // Fetch ratings for alle klasser parallelt - ved mange klasser 100+ vil det overbelaste api'et
+    const ratingsPerClass = await Promise.all(
+        classes.map((c) => getRatings(c.id).catch(() => []))
+    );
+ 
+    const classesWithRatings = classes.map((c, i) => ({
+        ...c,
+        ratings: ratingsPerClass[i],
+    }));
+
     const featuredIndex = classes.length
         ? Math.floor(Math.random() * classes.length)
         : 0;
-    const featured = classes[featuredIndex] ?? null;
-    const rest = classes.filter((_, i) => i !== featuredIndex);
+    const featured = classesWithRatings[featuredIndex] ?? null;
+    const rest = classesWithRatings.filter((_, i) => i !== featuredIndex);
 
 
-    const featuredRating = featured
-        ? (featured as any).ratings?.length
-            ? (featured as any).ratings.reduce((s: number, r: any) => s + r.rating, 0) /
-            (featured as any).ratings.length
-            : 0
-        : 0;
+    const featuredRating = getAvgRating(featured?.ratings);
 
     return (
         <main className="page-content" aria-label="Classes page">

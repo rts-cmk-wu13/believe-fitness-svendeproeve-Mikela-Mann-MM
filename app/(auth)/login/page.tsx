@@ -21,33 +21,41 @@ export default async function LoginPage({ searchParams }: Props) {
       )}
 
       {/* Brand */}
-      <div className="mb-10" role="banner">
+      <div className="mb-12" role="banner">
         <h1
         id="page-title"
-        className="text-6xl font-black leading-none mb-2 text-(--brand-yellow)">
+        className="text-6xl font-black leading-none mb-2 text-(--brand-yellow) pl-7.5">
           Believe
           <br /> 
           Fitness
         </h1>
-        <div className="flex items-center gap-3" aria-hidden="true">
-          <span className="block h-px w-6 bg-(--brand-black)" />
-<p>Train like a pro</p>
+        <div className="flex items-center gap-3 pt-6" aria-hidden="true">
+          <span className="block h-0.5 w-6 bg-(--brand-black)" />
+<p className="font-bold text-base">Train like a pro</p>
           </div>
         </div>
         
   
 {/* Form */}
 <section aria-labelledby="login-heading">
-  <h2 id="login-heading" className="text-xl font-bold mb-6">
+  <h2 id="login-heading" className="text-md font-bold mb-6 pt-10 pb-5">
     Log in with your credentials
   </h2>
   <LoginForm />
 </section>
 
+{/* Remember me */}
+        <label className="flex items-center justify-center gap-2 mt-5 text-(--grey-mid) text-sm cursor-pointer --font-body pt-3 pb-2">
+          <input type="checkbox" name="rememberMe" />
+          Remember Me
+        </label>
+      
+
 {/* Sign up link */}
 
         <p className="text-sm text-center mt-8 text-(--grey-mid)">
-          Are you not yet a Believer?{" "}
+          Are You not yet a Believer?{" "}
+          <br />
           <Link 
           href="/register" 
           className="text-(--grey-mid) underline"
@@ -58,12 +66,6 @@ export default async function LoginPage({ searchParams }: Props) {
           to start training like a pro
         </p>
 
-<div>
-        <label className="flex items-center justify-center gap-2 mt-5 text-(--grey-mid) text-[0.8rem] cursor-pointer --font-body">
-          <input type="checkbox" name="rememberMe" />
-          Remember Me
-        </label>
-      </div>
     </main>
   );
 } 

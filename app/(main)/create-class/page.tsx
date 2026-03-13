@@ -25,10 +25,10 @@ export default async function CreateClassPage({ searchParams }: Props) {
         : null;
 
     return (
-        <main className="page-content content-wrapper pt-6">
-            <h1 className="text-2xl font-bold mb-8">
-                {existingClass ? "Edit Class" : "Create Class"}
-            </h1>
+            <main className="content-wrapper page-content pt-8">
+            <h1 className="text-md font-black mb-6 pb-6">
+    {existingClass ? "Edit class" : "Create a new class"}
+</h1>
 
             <CreateClassForm
                 trainers={trainers}

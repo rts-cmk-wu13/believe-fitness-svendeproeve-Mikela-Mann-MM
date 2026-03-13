@@ -2,14 +2,14 @@
 
 export default function Footer() {
   return (
-    <footer className="content-wrapper py-10 text-center border-t border-(--grey-border)">
+    <footer className="content-wrapper py-4 text-center">
       {/* "Logo" */}
 
 
       <p className="text-2xl font-black leading-tight mb-1 text-(--brand-yellow)">
         Believe Fitness
       </p>
-      <p className="text-sm font-bold mb-6 text-(--brand-black)">
+      <p className="text-sm font-bold mb-6 text-(--brand-black) pb-3 pt-2">
         Train like a pro
       </p>
 

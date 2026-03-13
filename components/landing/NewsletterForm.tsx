@@ -39,7 +39,7 @@ export default function NewsletterForm() {
     return (
       <section className="content-wrapper py-10">
         <h2 className="text-2xl font-bold text-white mb-2">Sign up for our newsletter</h2>
-        <p className="text-sm text-green-400 mt-2">
+        <p className="text-sm text-green-600 mt-2">
            You are now subscribed to our newsletter!
         </p>
       </section>
@@ -48,7 +48,7 @@ export default function NewsletterForm() {
 
   return (
     <section className="content-wrapper py-8">
-      <h2 className="text-2xl font-bold text-black mb-2 pb-2">Sign up for our newsletter</h2>
+      <h2 className="text-lg font-bold text-black mb-2 pb-2">Sign up for our newsletter</h2>
       <p className="text-black/60 text-sm mb-5 leading-relaxed pb-3">
         Sign up to receive the latest news and announcements from Believe Fitness.
       </p>
@@ -65,7 +65,7 @@ export default function NewsletterForm() {
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-auto! px-5 shrink-0" //husk at fjerne important - det skal fikses!!!!!!
+            className="btn-primary btn-primary--sm" 
           >
             {loading ? "…" : "SIGN UP"}
           </button>

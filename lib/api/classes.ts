@@ -49,3 +49,17 @@ export function createClass(data: Omit<UpdateClassPayload, "id">, token?: string
         body: JSON.stringify(data),
     });
 }
+
+export async function uploadAsset(file: File, token?: string): Promise<{ id: number }> {
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000"}/api/v1/assets`, {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData,
+    });
+    
+    if (!res.ok) throw new Error("Asset upload failed");
+    return res.json();
+}

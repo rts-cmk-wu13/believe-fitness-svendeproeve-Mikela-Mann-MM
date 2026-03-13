@@ -11,20 +11,24 @@ import NewsletterForm from "@/components/landing/NewsletterForm";
 export default async function HomePage() {
 
     const [news, testimonials] = await Promise.all([
-         getNews().catch((e) => { console.error("news:", e); return []; }),
-    getTestimonials().catch((e) => { console.error("testimonials:", e); return []; }),
-]);
-
-    /*   console.log();  */
+        getNews().catch((e) => { console.error("news:", e); return []; }),
+        getTestimonials().catch((e) => { console.error("testimonials:", e); return []; }),
+    ]);
 
     return (
         <main className="page-content">
             <Hero />
             <NewsSection news={news} />
+            <div className="flex justify-center py-2">
+                <div className="h-0.75 w-12 bg-(--grey-mid) rounded-full" />
+            </div>
             <NewsletterForm />
             <TestimonialsCarousel testimonials={testimonials} />
-                <ContactForm />
-                <Footer />
-            </main>
-  );
+            <ContactForm />
+            <div className="flex justify-center py-2">
+                <div className="h-0.75 w-12 bg-(--grey-mid) rounded-full" />
+            </div>
+            <Footer />
+        </main>
+    );
 }

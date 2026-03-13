@@ -14,9 +14,11 @@ import {
   deleteClass,
   updateClass,
 } from "@/lib/api/classes";
+import { uploadAsset } from "@/lib/api/classes";
 import { createRating } from "./api/ratings"
 import { sendMessage } from "./api/message";
 import { reportError } from "./reportError";
+import { ApiError } from "./errors";
 import type {
   LoginState,
   RegisterState,
@@ -232,6 +234,9 @@ export async function rateAction(
     revalidatePath(`/classes/${classId}`);
     return {};
   } catch (err) {
+    if (err instanceof ApiError && err.status === 405) {
+      return { error: "You have already rated this class" };
+    }
     reportError(err, "rateAction");
     return { error: "Could not save rating" };
   }
@@ -281,6 +286,15 @@ export async function createClassAction(
   try {
     const session = await requireSession();
     requireInstructor(session.role);
+
+    // Upload fil hvis den findes
+    const file = formData.get("file");
+    if (file instanceof File && file.size > 0) {
+      const asset = await uploadAsset(file, session.token);
+      console.log("Asset ID:", asset.id);
+      values.assetId = asset.id;
+    }
+
     await createClass(values, session.token);
   } catch (err) {
     reportError(err, "createClassAction");

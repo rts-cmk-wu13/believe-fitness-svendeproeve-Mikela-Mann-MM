@@ -82,7 +82,7 @@ export default function SearchContent({ classes, trainers }: Props) {
         {/*  Popular classes  */}
         {filtered.length > 0 && (
           <section className="mb-8" aria-labelledby="classes-heading">
-            <h2 id="classes-heading" className="text-xl font-bold mb-4">
+            <h2 id="classes-heading" className="text-md font-bold mb-4 pt-6 pb-2">
               Popular classes
             </h2>
             <ClassCarousel classes={filtered} />
@@ -92,10 +92,10 @@ export default function SearchContent({ classes, trainers }: Props) {
         {/*  Popular trainers */}
         {filteredTrainers.length > 0 && (
           <section aria-labelledby="trainers-heading">
-            <h2 id="trainers-heading" className="text-xl font-bold mb-4">
+            <h2 id="trainers-heading" className="text-md font-bold mb-4 pt-8">
               Popular Trainers
             </h2>
-            <ul className="flex flex-col gap-2" aria-label="Trainer list">
+            <ul className="flex flex-col gap-2 pt-8" aria-label="Trainer list">
               {filteredTrainers.map((trainer) => (
                 <li key={trainer.id} className="py-4 text-center">
                   <p className="font-bold">{trainer.trainerName}</p>
