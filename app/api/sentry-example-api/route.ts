@@ -1,5 +1,3 @@
-
-/* 
 import * as Sentry from "@sentry/nextjs";
 export const dynamic = "force-dynamic";
 
@@ -17,4 +15,3 @@ export function GET() {
     "This error is raised on the backend called by the example page.",
   );
 }
- */

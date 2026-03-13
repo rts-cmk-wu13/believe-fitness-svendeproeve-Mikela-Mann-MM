@@ -1,5 +1,3 @@
-/* 
-
 "use client";
 
 import * as Sentry from "@sentry/nextjs";
@@ -55,7 +53,7 @@ export default function Page() {
           <a
             target="_blank"
             rel="noopener"
-            href="https://mikela-mann.sentry.io/issues/?project=4510935320166480"
+            href="https://mikela-mann.sentry.io/issues/?project=4511036659662928"
           >
             Issues Page
           </a>
@@ -237,4 +235,3 @@ export default function Page() {
     </div>
   );
 }
- */
