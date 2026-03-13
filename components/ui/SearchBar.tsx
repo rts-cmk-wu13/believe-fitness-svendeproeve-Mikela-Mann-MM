@@ -3,7 +3,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import ClassCarousel from "@/components/classes/ClassCarousel";
 import { Search, X } from "lucide-react";
 import { FitnessClassSummary, TrainerSummary, Rating } from "@/types";
@@ -16,11 +15,17 @@ interface Props {
 export default function SearchContent({ classes, trainers }: Props) {
   const [query, setQuery] = useState<string>("");
 
-  const filtered = query.trim()
+  const q = query.trim().toLowerCase();
+ 
+  const filtered = q
     ? classes.filter((c) =>
-      c.className.toLowerCase().includes(query.toLowerCase())
-    )
-    : classes;
+        c.className.toLowerCase().includes(q) ||
+        c.classDescription?.toLowerCase().includes(q) ||
+        c.classDay?.toLowerCase().includes(q) ||
+        c.trainer?.trainerName?.toLowerCase().includes(q)
+)
+: classes;
+
 
   const filteredTrainers = query.trim()
     ? trainers.filter((t) =>
@@ -78,6 +83,7 @@ export default function SearchContent({ classes, trainers }: Props) {
         )}
         {query.trim() && !hasResults && `No results for ${query}`}
       </div>
+
       <div id="search-results">
         {/*  Popular classes  */}
         {filtered.length > 0 && (
@@ -106,12 +112,12 @@ export default function SearchContent({ classes, trainers }: Props) {
         )}
 
         {/* Empty state */}
-        {query.trim() && !hasResults && (
+        {q && !hasResults && (
           <p
             role="alert"
             className="text-sm text-center py-8 text-(--grey-mid)"
           >
-            No results for &ldquo;{query}&rdquo;
+            Your search did not give any results. Try to search for something else.
           </p>
         )}
       </div>
